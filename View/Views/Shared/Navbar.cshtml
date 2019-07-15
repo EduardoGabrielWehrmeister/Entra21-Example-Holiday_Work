@@ -1,6 +1,6 @@
 ﻿<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand text" href="#">Gerenciamento</a>
 
     <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -13,27 +13,40 @@
 
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">
-                    Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link font-italic" href="#">Categorias</a>
             </li>
 
-            <!-- Dropdown -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <a class="nav-link dropdown-toggle font-italic" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Tabelas</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Categorias</a>
+                    <a class="dropdown-item" href="#">Cidades</a>
+                    <a class="dropdown-item" href="#">Clientes</a>
+                    <a class="dropdown-item" href="@Url.Action("Index", "Estado")">Estados</a>
+                    <a class="dropdown-item" href="#">Projetos</a>
+                    <a class="dropdown-item" href="#">Tarefas</a>
+                    <a class="dropdown-item" href="#">Usuários</a>
+                </div>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-italic" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Gerencimento de Usuários</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Usuários</a>
+                    <a class="dropdown-item" href="#">Tarefas</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-italic" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Gerencimento de Clientes</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Clientes</a>
+                    <a class="dropdown-item" href="#">Cidades</a>
+                    <a class="dropdown-item" href="@Url.Action("Index", "Estado")">Estados</a>
+                    <a class="dropdown-item" href="#">Projetos</a>
                 </div>
             </li>
 

@@ -5,6 +5,7 @@
 	data_criacao DATETIME2,
 	registro_ativo BIT
 );
+SELECT * FROM estados;
 CREATE TABLE cidades(
 	id INT PRIMARY KEY IDENTITY(1,1),
 	id_estado INT,

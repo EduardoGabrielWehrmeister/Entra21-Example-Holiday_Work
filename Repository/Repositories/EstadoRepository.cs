@@ -50,7 +50,8 @@ namespace Repository.Repositories
         {
             return (from x in context.Estados
                     where
-x.RegistroAtivo == true && (x.Nome.Contains(busca))
+x.RegistroAtivo == true && (x.Nome.Contains(busca) ||
+                            x.Sigla.Contains(busca))
                     orderby x.Nome
                     select x).ToList();
         }

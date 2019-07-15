@@ -30,12 +30,27 @@ namespace View.Controllers
             return Json(estados, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult Store(Estado estado)
         {
             estado.RegistroAtivo = true;
             repository.Inserir(estado);
             return Json(estado);
+        }
+
+        [HttpGet]
+        [Route("apagar/{id}")]
+        public JsonResult Apagar(int id)
+        {
+            bool apagou = repository.Delete(id);
+            return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet, Route("obterpeloid/{id}")]
+        public JsonResult obterPeloId(int id)
+        {
+            Estado estado = repository.ObterPeloId(id);
+            return Json(estado, JsonRequestBehavior.AllowGet);
         }
     }
 }
