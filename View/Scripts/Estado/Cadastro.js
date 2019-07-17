@@ -7,7 +7,7 @@
         }
     });
 
-    $(".table").on("click", "botao-editar", function () {
+    $(".table").on("click", ".botao-editar", function () {
         $id = $(this).data("id");
         $.ajax({
             url: '/estado/obterpeloid/' + $id,
@@ -64,7 +64,9 @@
                     linha.appendChild(colunaNome);
                     linha.appendChild(colunaSigla);
                     linha.appendChild(colunaAcao);
-                    document.getElementById("lista-estados").appendChild(linha);
+                    if (document.getElementById("lista-estados") != null) {
+                        document.getElementById("lista-estados").appendChild(linha);
+                    }
                 }
 
             },
@@ -82,6 +84,29 @@
         }
     });
 
+    function alterar() {
+        $nome = $("#campo-nome").val();
+        $sigla = $("#campo-sigla").val();
+
+        $.ajax({
+            method: "post",
+            url: '/estado/update',
+            data: {
+                Nome: $nome,
+                Sigla: $sigla
+            },
+            success: function (data) {
+                $id = -1;
+                $("#modalCadastroEstado").modal("show");
+                obterTodos();
+            },
+            error: function (data) {
+                console.log("ERRO");
+            }
+        })
+    }
+
+
     function inserir() {
         $nome = $("#campo-nome").val();
         $sigla = $("#campo-sigla").val();
@@ -92,7 +117,8 @@
                 Nome: $nome,
                 Sigla: $sigla
             },
-            sucess: function (data) {
+            success: function (data) {
+                $id = -1;
                 $("#modalCadastroEstado").modal("hide");
                 obterTodos();
                 limparCampos();

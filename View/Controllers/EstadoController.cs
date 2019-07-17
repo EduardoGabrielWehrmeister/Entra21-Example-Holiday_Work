@@ -52,5 +52,12 @@ namespace View.Controllers
             Estado estado = repository.ObterPeloId(id);
             return Json(estado, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult Update(Estado estado)
+        {
+            bool alterou = repository.Update(estado);
+            return Json(new { status = alterou });
+        }
     }
 }
