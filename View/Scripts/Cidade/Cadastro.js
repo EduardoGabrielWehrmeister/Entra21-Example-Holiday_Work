@@ -39,6 +39,8 @@ $(function () {
                 for (var i = 0; i < data.length; i++) {
                     var dado = data[i];
 
+                   
+
 
 
                     var linha = document.createElement("tr");
@@ -47,6 +49,9 @@ $(function () {
 
                     var ColunaNome = document.createElement("td");
                     ColunaNome.innerHTML = dado.Nome;
+
+                    var ColunaNomeEstado = document.createElement("td");
+                    colunaNomeEstado.innerHTML = dado.EstadoId;
 
                     var colunaNumeroHabitante = document.createElement("td");
                     colunaNumeroHabitante.innerHTML = dado.NumeroHabitante;
@@ -116,12 +121,15 @@ $(function () {
     function inserir() {
         $nome = $("#campo-nome-cidade").val();
         $numeroHabitante = $("#campo-numero-habitante").val();
+        $nomeEstado = $("#campo-estado").val();
+
         $.ajax({
             method: "post",
             url: "/cidade/store",
             data: {
                 Nome: $nome,
                 NumeroHabitante: $numeroHabitante,
+                NomeEstado: $nomeEstado
             },
             success: function (data) {
                 $id = -1;

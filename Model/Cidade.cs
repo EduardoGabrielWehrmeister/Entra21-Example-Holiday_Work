@@ -10,6 +10,11 @@ namespace Model
     [Table("cidades")]
     public class Cidade: Base
     {
+        public Cidade()
+        {
+            Clientes = new  HashSet<Cliente>();
+        }
+
         [Column("nome")]
         public string Nome { get; set; }
 
@@ -21,5 +26,7 @@ namespace Model
         [Column("estado_id")]
         public int EstadoId { get; set; }
 
+
+        public virtual ICollection<Cliente> Clientes { get; set; }
     }
 }

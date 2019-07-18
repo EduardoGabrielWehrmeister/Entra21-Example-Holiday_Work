@@ -12,7 +12,7 @@
         $.ajax({
             url: '/estado/obterpeloid/' + $id,
             method: 'get',
-            sucess: function (data) {
+            success: function (data) {
                 $id = data.Id;
                 $("#campo-nome").val(data.Nome);
                 $("#campo-sigla").val(data.Sigla);
@@ -77,7 +77,7 @@
     }
 
     $("#estado-botao-salvar").on("click", function () {
-        if ($id = -1) {
+        if ($id == -1) {
             inserir();
         } else {
             alterar();
@@ -93,12 +93,14 @@
             url: '/estado/update',
             data: {
                 Nome: $nome,
-                Sigla: $sigla
+                Sigla: $sigla,
+                Id: $id
             },
             success: function (data) {
                 $id = -1;
-                $("#modalCadastroEstado").modal("show");
+                $("#modalCadastroEstado").modal("hide");
                 obterTodos();
+                limparCampos();
             },
             error: function (data) {
                 console.log("ERRO");
@@ -139,7 +141,7 @@
         $.ajax({
             url: '/estado/apagar/' + $id,
             method: 'get',
-            sucess: function (data) {
+            success: function (data) {
                 obterTodos();
             },
             error: function (data) {

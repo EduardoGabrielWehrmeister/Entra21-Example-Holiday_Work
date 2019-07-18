@@ -57,36 +57,52 @@
                 </button>
             </div>
             <div class="modal-body">
-               
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="campo-">
-                                        Nome da Cidade
-                                    </label>
-                                    <input type="text" id="campo-nome-cidade"
-                                           class="form-control" />
-                                </div>
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="campo-numero-habitantes">Número de Habitantes</label>
-                                    <input type="text" id="campo-numero-habitante"
-                                           class="form-control" />
-                                </div>
+                <form action="@Url.Action("Store")" method="post" id="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="campo-cliente">Cliente</label>
+                                <select id="campo-cliente" name="EstadoId" class="form-control" required>
+                                    <option disabled="disabled" selected="selected">Selecione um Cliente</option>
+                                    @foreach (Model.Estado estado in ViewBag.Estados)
+                                    {
+                                        <option value="@estado.Id">@estado.Nome</option>
+                                    }
+                                </select>
                             </div>
                         </div>
-
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success"
-                                id="cidade-botao-salvar">
-                            <i class="fas fa-save"></i> Salvar
-                        </button>
+                </form>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="campo-">
+                                Nome da Cidade
+                            </label>
+                            <input type="text" id="campo-nome-cidade"
+                                   class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="campo-numero-habitantes">Número de Habitantes</label>
+                            <input type="text" id="campo-numero-habitante"
+                                   class="form-control" />
+                        </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"
+                        id="cidade-botao-salvar">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
             </div>
         </div>
+    </div>
+</div>
     </div>
 </div>

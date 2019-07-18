@@ -31,10 +31,20 @@ namespace View.Controllers
         {
             List<Cidade> cidades = repository.ObterTodos(busca);
 
-            List<Estado> estados = estadoRepository.ObterTodos(busca);            
+            List<Estado> estados = estadoRepository.ObterTodos(busca);
+            
            
             return Json(new {cidades, estados }, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult ObterIdEstado()
+        {
+            List<Estado> estados = estadoRepository.ObterTodos("");
+            ViewBag.Estados = estados;
+            return View();
+        }
+
 
         [HttpPost]
         public JsonResult Store(Cidade cidade)

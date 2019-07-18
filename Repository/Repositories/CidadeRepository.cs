@@ -44,24 +44,19 @@ namespace Repository.Repositories
             return (from x in context.Cidades where x.Id == id select x).FirstOrDefault();
         }
 
-        public List<Cidade> ObterTodos(int IdEstado,string busca, string nome, int numeroHabitantes)
+        public List<Cidade> ObterTodos(int IdEstado)
         {
-            //return (from x in context.Cidades.Include(y => y.Estado) where x.RegistroAtivo == true &&
-            //        (x.Nome.Contains(busca) || 
-            //        x.Estado.Nome.Contains(busca))
-            return context.Cidades
-                .Include("Estado")
-                .Where(x => x.EstadoId == IdEstado)
-                .ToList();
-
+            return context.Cidades.Include("Estado").Where(x => x.EstadoId == IdEstado)
+                    .ToList();
         }
 
         public List<Cidade> ObterTodos(string busca)
         {
-            return context.Cidades
-           .Include("Estado")
-           
-           .ToList();
+           return( from x in context.Cidades where x.RegistroAtivo == true &&
+                    (x.Nome.Contains(busca) ||
+                    x.Estado.Nome.Contains(busca))
+                    orderby x.Nome
+                    select x).ToList();
         }
 
         public bool Update(Cidade cidade)
