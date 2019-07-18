@@ -10,7 +10,14 @@ namespace Model
     [Table("categorias")]
     public class Categoria : Base
     {
+        public Categoria()
+        {
+            Tarefas = new HashSet<Tarefa>();
+        }
+
         [Column("nome")]
         public string Nome { get; set; }
+
+        public virtual ICollection<Tarefa> Tarefas { get; set; }
     }
 }
