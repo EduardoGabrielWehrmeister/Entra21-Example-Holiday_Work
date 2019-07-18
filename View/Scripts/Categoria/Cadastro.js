@@ -2,7 +2,7 @@
     $id = -1;
 
     $(".table").on("click", ".botao-editar", function () {
-        $id = (this).data("id");
+        $id = $(this).data("id");
         $.ajax({
             url: '/categoria/obterpeloid/' + $id,
             method: 'get',
@@ -15,14 +15,14 @@
     });
 
     $("#campo-pesquisa").on("keyup", function (e) {
-        if (e.keyCode = 13) {
+        if (e.keyCode == 13) {
             obterTodos();
         }
     });
 
     function obterTodos() {
-        $busca = $("campo-pesquisa").val();
-        $("#lista-hospitais").empty();
+        $busca = $("#campo-pesquisa").val();
+        $("#lista-categorias").empty();
         $.ajax({
             url: '/categoria/obtertodos/',
             method: 'get',
@@ -37,7 +37,7 @@
                     var colunaCodigo = document.createElement("td");
                     colunaCodigo.innerHTML = dado.Id;
 
-                    var colunaNome = document.createElement("tr");
+                    var colunaNome = document.createElement("td");
                     colunaNome.innerHTML = dado.Nome;
 
                     var colunaAcao = document.createElement("td");
@@ -61,14 +61,14 @@
                 }
             },
             error: function (data) {
-                alert("EERROOOOOOOOOOOOOOOOOOOOOOU");
+                alert("Erro obter categoria");
             }
         })
     }
 
     $("#categoria-botao-salvar").on("click", function () {
         if ($id == -1) {
-            inseri();
+            inserir();
         } else {
             alterar();
         }
@@ -78,7 +78,7 @@
         $nome = $("#campo-nome").val();
         $.ajax({
             method: "post",
-            url: "/hospital/update",
+            url: "/categoria/update",
             data: {
                 Nome: $nome,
                 Id: $id
@@ -89,13 +89,13 @@
                 obterTodos();
             },
             error: function (data) {
-                console.log("ERRO");
+                console.log("Erro alterar categoria");
             }
         })
     }
 
     function inserir() {
-        $nome("campo-nome").val();
+        $nome = $("#campo-nome").val();
         $.ajax({
             method: "post",
             url: "/categoria/store",
@@ -108,7 +108,7 @@
                 obterTodos();
             },
             error: function (data) {
-                console.log("ERRO2");
+                console.log("Erro inserir categoria");
             }
         })
     }
@@ -120,13 +120,13 @@
     $(".table").on("click", ".botao-apagar", function () {
         $id = $(this).data("id");
         $.ajax({
-            url: '/categoria/apagar/' + $id,
+            url: '/categoria/delete/' + $id,
             method: 'get',
             success: function (data) {
                 obterTodos();
             },
             error: function (data) {
-                console.log("Não Consegue né moisses");
+                console.log("Erro limpar categoria");
             }
         });
     });
