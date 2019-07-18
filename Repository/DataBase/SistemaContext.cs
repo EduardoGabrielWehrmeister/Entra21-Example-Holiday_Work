@@ -17,5 +17,7 @@ namespace Repository.DataBase
 
         public virtual DbSet<Estado> Estados { get; set; }
         public virtual DbSet<Cidade> Cidades { get; set; }
+
+        public virtual DbSet<Categoria> Categorias { get; set; }
     }
 }
