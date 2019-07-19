@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar</h2>
+<form action="@Url.Action("Update")" method="post" id="needs-validation">
+    <input type="hidden" name="id" value="@ViewBag.Cliente.Id" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="-campo-nome">Nome do Cliente</label>
+                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.Cliente.Nome" />
+
+                <label for="campo-cpf">Cpf</label>
+                <input type="text" name="cpf" id="campo-cpf" class="form-control" value="@ViewBag.Cliente.Cpf"/>
+
+
+                <label for="campo-data-nascimento">Data Nascimento</label>
+                <input type="date" name="dataNascimento" id="campo-data-nascimento" class="form-control" value="@ViewBag.Cliente.DataNascimento"/>
+
+                <label for="campo-cidade">Cidade</label>
+                <select id="campo-cidade" name="idCidade" class="form-control">
+                    <option disabled="disabled" selected="selected">Selecione uma Cidade</option>
+                    @foreach (Model.Cidade cidade in ViewBag.Cidades)
+                    {
+                        if (cidade.Id == ViewBag.Cliente.IdCidade)
+                        {
+                            <option value="@cidade.Id" selected="selected">@cidade.Nome</option>
+                        }
+                        else
+                        {
+
+                            <option value="@cidade.Id">@cidade.Nome</option>
+                        }
+                    }
+                </select>
+
+                <label for="campo-cep">Cep</label>
+                <input type="text" id="campo-cep" name="cep" class="form-control" value="@ViewBag.Cliente.Cep"/>
+
+                <label for="campo-numero">Numero</label>
+                <input type="text" name="numero" id="campo-numero" class="form-control" value="@ViewBag.Cliente.Numero"/>
+
+                <label for="campo-complemento">Complemento</label>
+                <textarea id="campo-complemento" name="complemento" class="form-control">@ViewBag.Cliente.Complemento</textarea>
+
+                <label for="campo-logradouro">Logradouro</label>
+                <input type="text" name="logradouro" id="campo-logradouro" class="form-control" value="@ViewBag.Cliente.Logradouro"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-success float-right mt-3" type="submit"><i class="fas fa-save"></i> Salvar</button>
+        </div>
+    </div>
+
+</form>
