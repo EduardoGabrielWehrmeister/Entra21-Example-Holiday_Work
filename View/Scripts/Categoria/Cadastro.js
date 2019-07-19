@@ -24,7 +24,7 @@
         $busca = $("#campo-pesquisa").val();
         $("#lista-categorias").empty();
         $.ajax({
-            url: '/categoria/obtertodos/',
+            url: '/categoria/obtertodos',
             method: 'get',
             data: {
                 busca: $busca
@@ -57,7 +57,9 @@
                     linha.appendChild(colunaCodigo);
                     linha.appendChild(colunaNome);
                     linha.appendChild(colunaAcao);
-                    document.getElementById("lista-categorias").appendChild(linha);
+                    if (document.getElementById("lista-categorias") != null) {
+                        document.getElementById("lista-categorias").appendChild(linha);
+                    }
                 }
             },
             error: function (data) {
@@ -78,7 +80,7 @@
         $nome = $("#campo-nome").val();
         $.ajax({
             method: "post",
-            url: "/categoria/update",
+            url: '/categoria/update',
             data: {
                 Nome: $nome,
                 Id: $id
@@ -87,6 +89,7 @@
                 $id - 1;
                 $("#modalCadastroCategoria").modal("hide");
                 obterTodos();
+                limparCampos();
             },
             error: function (data) {
                 console.log("Erro alterar categoria");
@@ -106,6 +109,7 @@
                 $id = -1;
                 $("#modalCadastroCategoria").modal("hide");
                 obterTodos();
+                limparCampos();
             },
             error: function (data) {
                 console.log("Erro inserir categoria");
@@ -120,7 +124,7 @@
     $(".table").on("click", ".botao-apagar", function () {
         $id = $(this).data("id");
         $.ajax({
-            url: '/categoria/delete/' + $id,
+            url: '/categoria/apagar/' + $id,
             method: 'get',
             success: function (data) {
                 obterTodos();

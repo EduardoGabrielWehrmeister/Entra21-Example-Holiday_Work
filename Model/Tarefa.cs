@@ -28,11 +28,12 @@ namespace Model
         public virtual Projeto Projeto { get; set; }
         [Column("projeto_id")]
         public int ProjetoId { get; set; }
+        */
 
         [ForeignKey("UsuarioResponsavelId")]
         public virtual Usuario Usuario { get; set; } 
         [Column("usuario_responsavel_id")]
         public int UsuarioResponsavelId { get; set; }
-        */
+        
     }
 }

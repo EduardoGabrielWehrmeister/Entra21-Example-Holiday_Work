@@ -47,7 +47,7 @@ namespace View.Controllers
         }
 
         [HttpGet, Route("obterpeloid/{id}")]
-        public JsonResult ObterPeloId(int id)
+        public JsonResult obterPeloId(int id)
         {
             Categoria categoria = repository.ObterPeloId(id);
             return Json(categoria, JsonRequestBehavior.AllowGet);

@@ -20,9 +20,9 @@ namespace Repository.Repositories
 
         public bool Delete(int id)
         {
-            Categoria categoria = (from categorias in context.Categorias
-                                   where categorias.Id == id
-                                   select categorias).FirstOrDefault();
+            Categoria categoria = (from x in context.Categorias
+                                   where x.Id == id
+                                   select x).FirstOrDefault();
 
             if (categoria == null)
             {
@@ -44,19 +44,17 @@ namespace Repository.Repositories
 
         public Categoria ObterPeloId(int id)
         {
-            return (from categoria 
-                    in context.Categorias
-                    where categoria.Id == id
-                    select categoria).FirstOrDefault();
+            return (from x in context.Categorias where x.Id == id select x).FirstOrDefault();
         }
 
         public List<Categoria> ObterTodos(string busca)
         {
-            return (from categoria in context.Categorias
-                    where categoria.RegistroAtivo == true &&
-                    (categoria.Nome.Contains(busca))
-                    orderby categoria.Nome
-                    select categoria).ToList();
+            return (from x in context.Categorias
+                    where 
+                    x.RegistroAtivo == true &&
+                    (x.Nome.Contains(busca))
+                    orderby x.Nome
+                    select x).ToList();
         }
 
         public bool Update(Categoria categoria)

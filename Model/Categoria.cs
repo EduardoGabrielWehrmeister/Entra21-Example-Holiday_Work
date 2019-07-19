@@ -18,6 +18,7 @@ namespace Model
         [Column("nome")]
         public string Nome { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<Tarefa> Tarefas { get; set; }
     }
 }
