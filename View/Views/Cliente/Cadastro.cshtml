@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Cadastro";
+}
+
+<h2>Cadastro de Clientes</h2>
+
+<form action="@Url.Action("Store")" method="post" id="needs-validation" >
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="-campo-nome">Nome do Cliente</label>
+                <input type="text" name="nome" id="campo-nome" class="form-control"/>
+
+                <label for="campo-cpf">Cpf</label>
+                <input type="text" name="cpf" id="campo-cpf" class="form-control"/>
+
+
+                <label for="campo-data-nascimento">Data Nascimento</label>
+                <input type="date" name="dataNascimento" id="campo-data-nascimento" class="form-control"/>
+
+                <label for="campo-cidade">Cidade</label>
+                <select id="campo-cidade" name="idCidade" class="form-control">
+                    <option disabled="disabled" selected="selected">Selecione uma Cidade</option>
+                    @foreach (Model.Cidade cidade in ViewBag.Cidades)
+                    {
+                        <option value="@cidade.Id">@cidade.Nome</option>
+                    }
+                </select>
+
+                <label for="campo-cep">Cep</label>
+                <input type="text" id="campo-cep" name="cep" class="form-control" />
+
+                <label for="campo-numero">Numero</label>
+                <input type="number" name="numero" id="campo-numero" class="form-control" />
+
+                <label for="campo-complemento">Complemento</label>
+                <textarea id="campo-complemento" name="complemento" class="form-control"></textarea>
+
+                <label for="campo-logradouro">Logradouro</label>
+                <input type="text" name="logradouro" id="campo-logradouro" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-success float-right mt-3"><i class="fas fa-save"></i> Salvar</button>
+        </div>
+    </div>
+
+</form>
