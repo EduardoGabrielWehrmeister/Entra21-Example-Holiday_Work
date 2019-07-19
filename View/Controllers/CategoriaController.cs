@@ -46,15 +46,15 @@ namespace View.Controllers
             return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet, Route("obteroeloid/{id}")]
-        public JsonResult obterPeloId(int id)
+        [HttpGet, Route("obterpeloid/{id}")]
+        public JsonResult ObterPeloId(int id)
         {
             Categoria categoria = repository.ObterPeloId(id);
             return Json(categoria, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult Update (Categoria categoria)
+        public JsonResult Update(Categoria categoria)
         {
             bool alterou = repository.Update(categoria);
             return Json(new { status = alterou });

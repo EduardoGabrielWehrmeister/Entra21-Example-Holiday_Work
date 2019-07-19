@@ -20,9 +20,9 @@ namespace Repository.Repositories
 
         public bool Delete(int id)
         {
-            Categoria categoria = (from x in context.Categorias
-                                   where x.Id == id
-                                   select x).FirstOrDefault();
+            Categoria categoria = (from categorias in context.Categorias
+                                   where categorias.Id == id
+                                   select categorias).FirstOrDefault();
 
             if (categoria == null)
             {
@@ -44,29 +44,32 @@ namespace Repository.Repositories
 
         public Categoria ObterPeloId(int id)
         {
-            return (from x in context.Categorias where x.Id == id select x).FirstOrDefault();
+            return (from categoria 
+                    in context.Categorias
+                    where categoria.Id == id
+                    select categoria).FirstOrDefault();
         }
 
         public List<Categoria> ObterTodos(string busca)
         {
-            return (from x in context.Categorias
-                    where x.RegistroAtivo == true &&
-                    (x.Nome.Contains(busca))
-                    orderby x.Nome
-                    select x).ToList();
+            return (from categoria in context.Categorias
+                    where categoria.RegistroAtivo == true &&
+                    (categoria.Nome.Contains(busca))
+                    orderby categoria.Nome
+                    select categoria).ToList();
         }
 
         public bool Update(Categoria categoria)
         {
-            Categoria estadoOriginal = (from x in context.Categorias
+            Categoria categoriaOriginal = (from x in context.Categorias
                                         where x.Id == categoria.Id
                                         select x).FirstOrDefault();
 
-            if (estadoOriginal == null)
+            if (categoriaOriginal == null)
             {
                 return false;
             }
-            estadoOriginal.Nome = categoria.Nome;
+            categoriaOriginal.Nome = categoria.Nome;
             context.SaveChanges();
             return true;
         }
