@@ -26,7 +26,7 @@ namespace Model
         [Column("estado_id")]
         public int EstadoId { get; set; }
 
-
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<Cliente> Clientes { get; set; }
     }
 }

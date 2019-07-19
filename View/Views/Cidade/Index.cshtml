@@ -5,11 +5,9 @@
 
 <h3>Lista de Cidades</h3>
 
-<button class="btn btn-primary" data-toggle="modal"
-        data-target="#modalCadastroCidade">
+<button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalCadastroCidade">
     <i class="fas fa-plus"></i> Nova Cidade
 </button>
-
 
 <div class="row">
     <div class="col-3 offset-9">
@@ -22,87 +20,74 @@
 </div>
 
 <table class="table table-striped table-bordered table-hover">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th>Código</th>
             <th>Nome da Cidade</th>
             <th>Nome do Estado</th>
-            <th>Número de Habitantes</th>
+            <th>Numero de Habitantes</th>
             <th>Ação</th>
         </tr>
     </thead>
-    <tfoot>
+    <tfoot class="thead-dark">
         <tr>
             <th>Código</th>
             <th>Nome da Cidade</th>
             <th>Nome do Estado</th>
-            <th>Número de Habitantes</th>
+            <th>Numero de Habitantes</th>
             <th>Ação</th>
         </tr>
     </tfoot>
     <tbody id="lista-cidades"></tbody>
 </table>
 
-<!-- Modal -->
 <div class="modal fade" id="modalCadastroCidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"
-                    id="exampleModalLabel">
-                    Cadastro de Cidade
-                </h5>
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Cidade</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
-                <form action="@Url.Action("Store")" method="post" id="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="campo-cliente">Cliente</label>
-                                <select id="campo-cliente" name="EstadoId" class="form-control" required>
-                                    <option disabled="disabled" selected="selected">Selecione um Cliente</option>
-                                    @foreach (Model.Estado estado in ViewBag.Estados)
-                                    {
-                                        <option value="@estado.Id">@estado.Nome</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="form-group">
-                            <label for="campo-">
-                                Nome da Cidade
-                            </label>
-                            <input type="text" id="campo-nome-cidade"
-                                   class="form-control" />
-                        </div>
-                    </div>
+                            <select id="campo-estado" class="form-control select2-results__options">                          
+                            </select>
 
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="campo-numero-habitantes">Número de Habitantes</label>
-                            <input type="text" id="campo-numero-habitante"
-                                   class="form-control" />
                         </div>
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="campo-nome">Cidade</label>
+                            <input type="text" id="campo-nome" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="campo-numero-habitantes">Numero de Habitantes</label>
+                            <input type="text" id="campo-sigla" class="form-control" />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success"
-                        id="cidade-botao-salvar">
+                <button type="button" class="btn btn-success" id="cidade-botao-salvar">
                     <i class="fas fa-save"></i> Salvar
                 </button>
             </div>
         </div>
     </div>
 </div>
-    </div>
-</div>
+
+
+
+
+

@@ -21,6 +21,7 @@ namespace Model
         [Column("sigla")]
         public string Sigla { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<Cidade> Cidades { get; set; }
     }
 }

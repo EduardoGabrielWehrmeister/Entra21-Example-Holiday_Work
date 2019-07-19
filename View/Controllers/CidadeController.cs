@@ -10,8 +10,9 @@ namespace View.Controllers
 {
     public class CidadeController : Controller
     {
-        private EstadoRepository estadoRepository;
         private CidadeRepository repository;
+
+        private EstadoRepository estadoRepository;
 
         public CidadeController()
         {
@@ -30,19 +31,16 @@ namespace View.Controllers
         public JsonResult ObterTodos(string busca)
         {
             List<Cidade> cidades = repository.ObterTodos(busca);
-
             List<Estado> estados = estadoRepository.ObterTodos(busca);
-            
-           
-            return Json(new {cidades, estados }, JsonRequestBehavior.AllowGet);
+            return Json(new { Estado = estados, Cidade = cidades }, JsonRequestBehavior.AllowGet);
         }
 
-
-        public ActionResult ObterIdEstado()
+        [HttpGet]
+        public JsonResult ObterTodosEstado()
         {
             List<Estado> estados = estadoRepository.ObterTodos("");
-            ViewBag.Estados = estados;
-            return View();
+            return Json(estados, JsonRequestBehavior.AllowGet);
+
         }
 
 
@@ -54,8 +52,7 @@ namespace View.Controllers
             return Json(cidade);
         }
 
-        [HttpGet]
-        [Route("apagar/{id}")]
+        [HttpGet, Route("apagar/{id}")]
         public JsonResult Apagar(int id)
         {
             bool apagou = repository.Delete(id);
@@ -63,13 +60,11 @@ namespace View.Controllers
         }
 
         [HttpGet, Route("obterpeloid/{id}")]
-        public JsonResult obterPeloId(int id)
+        public JsonResult ObterPeloId(int id)
         {
             Cidade cidade = repository.ObterPeloId(id);
-
             Estado estado = estadoRepository.ObterPeloId(id);
-            
-            return Json(new { cidade, estado }, JsonRequestBehavior.AllowGet);
+            return Json(new { Estado = estado, Cidade = cidade }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -78,6 +73,6 @@ namespace View.Controllers
             bool alterou = repository.Update(cidade);
             return Json(new { status = alterou });
         }
-    
+
     }
 }

@@ -51,7 +51,7 @@ $(function () {
                     ColunaNome.innerHTML = dado.Nome;
 
                     var ColunaNomeEstado = document.createElement("td");
-                    colunaNomeEstado.innerHTML = dado.EstadoId;
+                    colunaNomeEstado.innerHTML = dado.Cidade.Estado.Nome;              
 
                     var colunaNumeroHabitante = document.createElement("td");
                     colunaNumeroHabitante.innerHTML = dado.NumeroHabitante;
@@ -76,10 +76,12 @@ $(function () {
 
                     linha.appendChild(colunaCodigo);
                     linha.appendChild(ColunaNome);
+                    linha.appendChild(ColunaNomeEstado);
                     linha.appendChild(colunaNumeroHabitante);
                     linha.appendChild(colunaAcao);
                     document.getElementById("lista-cidade").appendChild(linha);
                 }
+
             },
             error: function (data) {
                 alert("DEU RUIM");
@@ -94,6 +96,9 @@ $(function () {
             alterar();
         }
     });
+
+
+
 
     function alterar() {
         $nome = $("#campo-nome-cidade").val();
@@ -118,6 +123,28 @@ $(function () {
         });
     }
 
+    function ObterEstado() {
+        $('#campo-estado').select2({
+            ajax: {
+                url: '/cidade/obtertodos',
+                data: function (params) {
+                    var query = {
+                        search: params.Cidade.Estado.Nome,
+                    };
+
+                    return query;
+                },
+                success: function (data) {
+                    obterTodos();
+                }
+
+                
+            }
+        });
+    }
+
+
+
     function inserir() {
         $nome = $("#campo-nome-cidade").val();
         $numeroHabitante = $("#campo-numero-habitante").val();
@@ -132,6 +159,7 @@ $(function () {
                 NomeEstado: $nomeEstado
             },
             success: function (data) {
+                ObterEstado();
                 $id = -1;
                 $("#modalCadastroCidade").modal("hide");
                 obterTodos();
