@@ -24,6 +24,7 @@ namespace Model
         [Column("senha")]
         public string Senha { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<Tarefa> Tarefas { get; set; }
     }
 }

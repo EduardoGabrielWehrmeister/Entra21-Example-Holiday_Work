@@ -20,6 +20,7 @@ namespace Repository.DataBase
 
         public virtual DbSet<Cliente> Clientes { get; set; }
 
+        public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
     }
 }

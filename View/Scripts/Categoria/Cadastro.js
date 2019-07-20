@@ -86,7 +86,7 @@
                 Id: $id
             },
             success: function (data) {
-                $id - 1;
+                $id = -1;
                 $("#modalCadastroCategoria").modal("hide");
                 obterTodos();
                 limparCampos();
