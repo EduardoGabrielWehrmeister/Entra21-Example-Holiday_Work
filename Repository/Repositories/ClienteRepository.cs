@@ -43,9 +43,9 @@ namespace Repository.Repositories
             return (from x in context.Clientes where x.Id == id select x).FirstOrDefault();
         }
 
-        public List<Cliente> ObterTodos(int IdCidade)
+        public List<Cliente> ObterTodos(int idCidade)
         {
-            return context.Clientes.Include("Cidade").Where(x => x.IdCidade == IdCidade).ToList();
+            return context.Clientes.Include("Cidade").Where(x => x.IdCidade == idCidade).ToList();
         }
 
         public List<Cliente> ObterTodos(string busca)

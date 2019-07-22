@@ -16,6 +16,7 @@ CREATE TABLE cidades(
 	data_criacao DATETIME2,
 	registro_ativo BIT
 );
+SELECT * FROM cidades;
 DROP TABLE clientes;
 CREATE TABLE clientes(
 	id INT PRIMARY KEY IDENTITY(1,1),

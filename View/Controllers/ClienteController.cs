@@ -25,10 +25,10 @@ namespace View.Controllers
             return View();
         }
 
-        public ActionResult Cadastro(string busca)
+        public ActionResult Cadastro()
         {
             CidadeRepository cidadeRepository = new CidadeRepository();
-            List<Cidade> cidades = cidadeRepository.ObterTodos(busca);
+            List<Cidade> cidades = cidadeRepository.ObterTodos("");
             ViewBag.Cidades = cidades;
             return View();
         }

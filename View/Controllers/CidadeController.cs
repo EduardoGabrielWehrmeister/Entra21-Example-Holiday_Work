@@ -21,58 +21,70 @@ namespace View.Controllers
             estadoRepository = new EstadoRepository();
         }
 
-        [HttpGet]
-        public ActionResult Index()
+
+        public ActionResult Index(string busca)
         {
+            List<Cidade> cidades = repository.ObterTodos(busca);
+            ViewBag.Cidades = cidades;
             return View();
         }
 
-        [HttpGet]
+       /* [HttpGet]
         public JsonResult ObterTodos(string busca)
         {
             List<Cidade> cidades = repository.ObterTodos(busca);
             List<Estado> estados = estadoRepository.ObterTodos(busca);
-            return Json(new { Estado = estados, Cidade = cidades }, JsonRequestBehavior.AllowGet);
-        }
+            return Json(new { Cidades = cidades, Estados = estados}, JsonRequestBehavior.AllowGet);
 
-        [HttpGet]
-        public JsonResult ObterTodosEstado()
+            
+        }
+        */
+
+        public ActionResult Cadastro()
         {
             List<Estado> estados = estadoRepository.ObterTodos("");
-            return Json(estados, JsonRequestBehavior.AllowGet);
-
+            ViewBag.Estados = estados;
+            return View();
         }
 
-
-        [HttpPost]
-        public JsonResult Store(Cidade cidade)
+        public ActionResult Store(int idEstado, string nome, int numeroHabitantes)
         {
-            cidade.RegistroAtivo = true;
+            Cidade cidade = new Cidade();
+            cidade.EstadoId = idEstado;
+            cidade.Nome = nome;
+            cidade.NumeroHabitantes = numeroHabitantes;
             repository.Inserir(cidade);
-            return Json(cidade);
+            return RedirectToAction("Index");
         }
 
-        [HttpGet, Route("apagar/{id}")]
-        public JsonResult Apagar(int id)
+        public ActionResult Delete(int id)
         {
-            bool apagou = repository.Delete(id);
-            return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
+            repository.Delete(id);
+            return RedirectToAction("Index");
         }
 
-        [HttpGet, Route("obterpeloid/{id}")]
-        public JsonResult ObterPeloId(int id)
+        public ActionResult Editar(int id)
         {
             Cidade cidade = repository.ObterPeloId(id);
-            Estado estado = estadoRepository.ObterPeloId(id);
-            return Json(new { Estado = estado, Cidade = cidade }, JsonRequestBehavior.AllowGet);
+            ViewBag.Cidade = cidade;
+
+            List<Estado> estados = estadoRepository.ObterTodos("");
+            ViewBag.Estados = estados;
+            return View();
         }
 
-        [HttpPost]
-        public JsonResult Update(Cidade cidade)
+        public ActionResult Update(int id, int idEstado, string nome, int numeroHabitantes)
         {
-            bool alterou = repository.Update(cidade);
-            return Json(new { status = alterou });
+            Cidade cidade = new Cidade();
+            cidade.Id = id;
+            cidade.EstadoId = idEstado;
+            cidade.Nome = nome;
+            cidade.NumeroHabitantes = numeroHabitantes;
+            repository.Update(cidade);
+            return RedirectToAction("Index");
         }
 
     }
+
+
 }

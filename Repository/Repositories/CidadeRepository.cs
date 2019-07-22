@@ -31,6 +31,12 @@ namespace Repository.Repositories
             return true;
         }
 
+        public List<Cidade> ObterTodos(int idEstado)
+        {
+            return context.Cidades.Include("Estado").Where(x => x.EstadoId == idEstado)
+                .ToList();
+        }
+
         public int Inserir(Cidade cidade)
         {
             cidade.DataCriacao = DateTime.Now;
@@ -44,19 +50,15 @@ namespace Repository.Repositories
             return (from x in context.Cidades where x.Id == id select x).FirstOrDefault();
         }
 
-        public List<Cidade> ObterTodos(int IdEstado)
-        {
-            return context.Cidades.Include("Estado").Where(x => x.EstadoId == IdEstado)
-                    .ToList();
-        }
-
         public List<Cidade> ObterTodos(string busca)
         {
-           return( from x in context.Cidades where x.RegistroAtivo == true &&
-                    (x.Nome.Contains(busca) ||
-                    x.Estado.Nome.Contains(busca))
+            return (from x in context.Cidades
+                    where x.RegistroAtivo == true &&
+(x.Nome.Contains(busca) ||
+x.Estado.Nome.Contains(busca))
                     orderby x.Nome
                     select x).ToList();
+                               
         }
 
         public bool Update(Cidade cidade)

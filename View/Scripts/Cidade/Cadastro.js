@@ -1,21 +1,5 @@
 ﻿
 $(function () {
-    $id = -1;
-
-    $(".table").on("click", ".botao-editar", function () {
-        $id = $(this).data("id");
-        $.ajax({
-            url: '/cidade/obterpeloid/' + $id,
-            method: 'get',
-            success: function (data) {
-                $id = data.Id;
-                $("#campo-nome-cidade").val(data.Nome);
-                $("#campo-numero-habitante").val(data.NumeroHabitante);
-                $("#modalCadastroCidade").modal("show");
-            }
-        })
-    });
-
 
     $("#campo-pesquisa").on("keyup", function (e) {
         // 13 == Tecla Enter do teclado
@@ -47,11 +31,12 @@ $(function () {
                     var colunaCodigo = document.createElement("td");
                     colunaCodigo.innerHTML = dado.Id;
 
+                    var ColunaNomeEstado = document.createElement("td");
+                    colunaNomeEstado.innerHTML = dado.Cidade.Estado.Nome;           
+                    
                     var ColunaNome = document.createElement("td");
                     ColunaNome.innerHTML = dado.Nome;
 
-                    var ColunaNomeEstado = document.createElement("td");
-                    colunaNomeEstado.innerHTML = dado.Cidade.Estado.Nome;              
 
                     var colunaNumeroHabitante = document.createElement("td");
                     colunaNumeroHabitante.innerHTML = dado.NumeroHabitante;
@@ -75,11 +60,13 @@ $(function () {
                     colunaAcao.appendChild(botaoApagar);
 
                     linha.appendChild(colunaCodigo);
-                    linha.appendChild(ColunaNome);
                     linha.appendChild(ColunaNomeEstado);
+                    linha.appendChild(ColunaNome);
                     linha.appendChild(colunaNumeroHabitante);
                     linha.appendChild(colunaAcao);
-                    document.getElementById("lista-cidade").appendChild(linha);
+                    if (document.getElementById("lista-cidades") != null) {
+                        document.getElementById("lista-cidades").appendChild(linha);
+                    }
                 }
 
             },
@@ -88,107 +75,6 @@ $(function () {
             }
         })
     }
-
-    $("#cidade-botao-salvar").on("click", function () {
-        if ($id == -1) {
-            inserir();
-        } else {
-            alterar();
-        }
-    });
-
-
-
-
-    function alterar() {
-        $nome = $("#campo-nome-cidade").val();
-        $numeroHabitante = $("#campo-numero-habitante").val();        
-        $.ajax({
-            method: "post",
-            url: "/cidade/update",
-            data: {
-                Nome: $nome,
-                NumeroHabitante: $numeroHabitante,
-                Id: $id
-            },
-            success: function (data) {
-                $id = -1;
-                $("#modalCadastroCidade").modal("hide");
-                obterTodos();
-                limparCampos();
-            },
-            error: function (data) {
-                console.log("ERRO");
-            }
-        });
-    }
-
-    function ObterEstado() {
-        $('#campo-estado').select2({
-            ajax: {
-                url: '/cidade/obtertodos',
-                data: function (params) {
-                    var query = {
-                        search: params.Cidade.Estado.Nome,
-                    };
-
-                    return query;
-                },
-                success: function (data) {
-                    obterTodos();
-                }
-
-                
-            }
-        });
-    }
-
-
-
-    function inserir() {
-        $nome = $("#campo-nome-cidade").val();
-        $numeroHabitante = $("#campo-numero-habitante").val();
-        $nomeEstado = $("#campo-estado").val();
-
-        $.ajax({
-            method: "post",
-            url: "/cidade/store",
-            data: {
-                Nome: $nome,
-                NumeroHabitante: $numeroHabitante,
-                NomeEstado: $nomeEstado
-            },
-            success: function (data) {
-                ObterEstado();
-                $id = -1;
-                $("#modalCadastroCidade").modal("hide");
-                obterTodos();
-                limparCampos();
-            },
-            error: function (data) {
-                console.log("ERRO");
-            }
-        })
-    }
-
-    function limparCampos() {
-        $("#campo-nome-cidade").val("");
-        $("#campo-numero-habitante").val("");
-    }
-
-    $(".table").on("click", ".botao-apagar", function () {
-        $id = $(this).data("id");
-        $.ajax({
-            url: '/cidade/apagar/' + $id,
-            method: 'get',
-            success: function (data) {
-                obterTodos();
-            },
-            error: function (data) {
-                console.log('Deu ruim filhão');
-            }
-        });
-    });
 
     obterTodos();
 });
