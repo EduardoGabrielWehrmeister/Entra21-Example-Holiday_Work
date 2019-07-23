@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase\Connection.cs" />
     <Compile Include="DataBase\SistemaContext.cs" />
     <Compile Include="Interfaces\ICategoriaRepository.cs" />
     <Compile Include="Interfaces\ICidadeRepository.cs" />
