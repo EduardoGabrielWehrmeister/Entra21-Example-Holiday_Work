@@ -16,7 +16,7 @@ namespace View.Controllers
 
         private UsuarioRepository usuarioRepository;
 
-        //private ProjetoRepository projetoRepository;
+        private ProjetoRepository projetoRepository;
 
         public TarefaController()
         {
@@ -26,12 +26,13 @@ namespace View.Controllers
 
             usuarioRepository = new UsuarioRepository();
 
-            //projetoRepository = new ProjetoRepository();
+            projetoRepository = new ProjetoRepository();
         }
-
-        [HttpGet]
-        public ActionResult Index()
+        
+        public ActionResult Index(string busca)
         {
+            List<Tarefa> tarefas = repository.ObterTodos(busca);
+            ViewBag.Tarefas = tarefas;
             return View();
         }
 
@@ -41,64 +42,65 @@ namespace View.Controllers
             List<Tarefa> tarefas = repository.ObterTodos(busca);
             List<Categoria> categorias = categoriaRepository.ObterTodos(busca);
             List<Usuario> usuarios = usuarioRepository.ObterTodos(busca);
-            //List<Projeto> projetos = projetoRepository.ObterTodos(busca);
+            List<Projeto> projetos = projetoRepository.ObterTodos(busca);
             return Json(new { Categoria = categorias, Tarefa = tarefas,
             Usuario = usuarios, Projeto = projetos}, JsonRequestBehavior.AllowGet);
-        }*/
-
-        [HttpGet]
-        public JsonResult ObterTodosCategoria()
-        {
-            List<Categoria> categorias = categoriaRepository.ObterTodos("");
-            return Json(categorias, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public JsonResult ObterTodosUsuario()
-        {
-            List<Usuario> usuarios = usuarioRepository.ObterTodos("");
-            return Json(usuarios, JsonRequestBehavior.AllowGet);
-        }
-
-        /*[HttpGet]
-        public JsonResult ObterTodosProjeto()
-        {
-            List<Projeto> projetos = projetoRepository.ObterTodos("");
-            return Json(projetos, JsonRequestBehavior.AllowGet);
         }
         */
 
-        [HttpPost]
-        public JsonResult Store(Tarefa tarefa)
+
+        
+        public ActionResult Store(int idCategoria, int idUsuario, int idProjeto, string titulo, string descricao, DateTime duracao)
         {
-            tarefa.RegistroAtivo = true;
-            repository.Inserir(tarefa);
-            return Json(tarefa);
+            Tarefa tarefa = new Tarefa();
+            tarefa.CategoriaId = idCategoria;
+            tarefa.UsuarioId = idUsuario;
+            tarefa.ProjetoId = idProjeto;
+            tarefa.Titulo = titulo;
+            tarefa.Descricao = descricao;
+            tarefa.Duracao = duracao;
+            return RedirectToAction("Index");
         }
 
-        [HttpGet, Route("apagar/{id}")]
-        public JsonResult Apagar(int id)
+        public ActionResult Apagar(int id)
         {
-            bool apagou = repository.Apagar(id);
-            return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
+            repository.Apagar(id);
+            return RedirectToAction("Index");
+            
         }
 
-        /*[HttpGet, Route("obterpeloid/{id}")]
-        public JsonResult ObterPeloId(int id)
+        
+        public ActionResult Update(int id, int idCategoria, int idUsuario, int idProjeto, string titulo, string descricao, DateTime duracao)
+        {
+            Tarefa tarefa = new Tarefa();
+            tarefa.Id = id;
+            tarefa.CategoriaId = idCategoria;
+            tarefa.UsuarioId = idUsuario;
+            tarefa.ProjetoId = idProjeto;
+            tarefa.Titulo = titulo;
+            tarefa.Descricao = descricao;
+            tarefa.Duracao = duracao;
+            return RedirectToAction("Index");
+        }
+
+        
+        public ActionResult Editar(int id)
         {
             Tarefa tarefa = repository.ObterPeloId(id);
-            Categoria categoria = categoriaRepository.ObterPeloId(id);
-            Usuario usuario = usuarioRepository.ObterPeloId(id);
-            //Projeto projeto = projetoReposirtory.ObterPeloId(id);
-            return Json(new { Categoria = categoria, Tarefa = tarefa,
-            Usuario = usuario, Projeto = projeto}, JsonRequestBehavior.AllowGet);
-        }*/
+            ViewBag.Tarefa = tarefa;
 
-        [HttpPost]
-        public JsonResult Update(Tarefa tarefa)
-        {
-            bool alterou = repository.Alterar(tarefa);
-            return Json(new { status = alterou });
+            List<Categoria> categorias = categoriaRepository.ObterTodos("");
+            ViewBag.Categorias = categorias;
+
+            List<Projeto> projetos = projetoRepository.ObterTodos("");
+            ViewBag.Projetos = projetos;
+
+            List<Usuario> usuarios = usuarioRepository.ObterTodos("");
+            ViewBag.Usuarios = usuarios;
+
+            return View();
         }
+
+
     }
 }

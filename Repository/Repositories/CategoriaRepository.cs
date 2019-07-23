@@ -11,65 +11,28 @@ namespace Repository.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        public SistemaContext context;
-
-        public CategoriaRepository()
-        {
-            context = new SistemaContext();
-        }
-
         public bool Delete(int id)
         {
-            Categoria categoria = (from x in context.Categorias
-                                   where x.Id == id
-                                   select x).FirstOrDefault();
-
-            if (categoria == null)
-            {
-                return false;
-            }
-
-            categoria.RegistroAtivo = false;
-            context.SaveChanges();
-            return true;
         }
 
         public int Inserir(Categoria categoria)
         {
-            categoria.DataCriacao = DateTime.Now;
-            context.Categorias.Add(categoria);
-            context.SaveChanges();
-            return categoria.Id;
+            throw new NotImplementedException();
         }
 
         public Categoria ObterPeloId(int id)
         {
-            return (from x in context.Categorias where x.Id == id select x).FirstOrDefault();
+            throw new NotImplementedException();
         }
 
-        public List<Categoria> ObterTodos(string busca)
+        public List<Categoria> ObterTodos()
         {
-            return (from x in context.Categorias
-                    where 
-                    x.RegistroAtivo == true &&
-                    (x.Nome.Contains(busca))
-                    orderby x.Nome
-                    select x).ToList();
+            throw new NotImplementedException();
         }
 
         public bool Update(Categoria categoria)
         {
-            Categoria categoriaOriginal = (from x in context.Categorias
-                                        where x.Id == categoria.Id
-                                        select x).FirstOrDefault();
-
-            if (categoriaOriginal == null)
-            {
-                return false;
-            }
-            categoriaOriginal.Nome = categoria.Nome;
-            context.SaveChanges();
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

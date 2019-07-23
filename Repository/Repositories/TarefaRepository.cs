@@ -28,8 +28,8 @@ namespace Repository.Repositories
             tarefaOriginal.Titulo = tarefa.Titulo;
             tarefaOriginal.Descricao = tarefa.Descricao;
             tarefaOriginal.Duracao = tarefa.Duracao;
-            tarefaOriginal.UsuarioResponsavelId = tarefa.UsuarioResponsavelId;
-            //tarefaOriginal.ProjetoId = tarefa.ProjetoId;
+            tarefaOriginal.UsuarioId = tarefa.UsuarioId;
+            tarefaOriginal.ProjetoId = tarefa.ProjetoId;
             context.SaveChanges();
             return true;
         }
@@ -68,20 +68,15 @@ namespace Repository.Repositories
                    select x).ToList();
         }
 
-        public List<Tarefa> ObterTodos(int IdCategoria)
+        public List<Tarefa> ObterTodos(int idCategoria, int idProjeto, int idUsuario)
         {
-            return context.Tarefas.Include("Categoria").Where(x => x.CategoriaId == IdCategoria).ToList();
+            return context.Tarefas.Include("Categoria")
+                .Include("Projeto")
+                .Include("Usuario")
+                .Where(x => x.CategoriaId == idCategoria).ToList()
+                .Where(y => y.ProjetoId == idProjeto)
+                .Where(z => z.UsuarioId == idUsuario).ToList();
         }
 
-        /*public List<Tarefa> ObterTodos(int IdProjeto)
-        {
-            return context.Tarefas.Include("Projeto").Where(x => x.ProjetoId == IdProjeto).ToList();
-        }
-
-        public List<Tarefa> ObterTodos(int IdUsuarioResponsavel)
-        {
-            return context.Tarefas.Include("UsuarioResponsavel").Where(
-                x => x.UsuarioResponsavelId == IdUsuarioResponsavel).ToList();
-        }*/
     }
 }

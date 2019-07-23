@@ -15,7 +15,7 @@ namespace Repository.Interfaces
 
         bool Update(Categoria categoria);
 
-        List<Categoria> ObterTodos(string busca);
+        List<Categoria> ObterTodos();
 
         Categoria ObterPeloId(int id);
     }
