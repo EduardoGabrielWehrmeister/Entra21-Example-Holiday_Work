@@ -54,13 +54,13 @@ namespace View.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Editar(int id, string busca)
+        public ActionResult Editar(int id)
         {
             Cliente cliente = repository.ObterPeloId(id);
             ViewBag.Cliente = cliente;
 
             CidadeRepository cidadeRepository = new CidadeRepository();
-            List<Cidade> cidades = cidadeRepository.ObterTodos(busca);
+            List<Cidade> cidades = cidadeRepository.ObterTodos("");
             ViewBag.Cidades = cidades;
             return View();
         }
