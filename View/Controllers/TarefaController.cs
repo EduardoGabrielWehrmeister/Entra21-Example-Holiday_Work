@@ -10,6 +10,7 @@ namespace View.Controllers
 {
     public class TarefaController : Controller
     {
+        /*
         private TarefaRepository repository;
 
         private CategoriaRepository categoriaRepository;
@@ -36,7 +37,7 @@ namespace View.Controllers
             return View();
         }
 
-        /*[HttpGet]
+        [HttpGet]
         public ActionResult ObterTodos(string busca)
         {
             List<Tarefa> tarefas = repository.ObterTodos(busca);
@@ -46,7 +47,7 @@ namespace View.Controllers
             return Json(new { Categoria = categorias, Tarefa = tarefas,
             Usuario = usuarios, Projeto = projetos}, JsonRequestBehavior.AllowGet);
         }
-        */
+        
 
 
         
@@ -100,6 +101,7 @@ namespace View.Controllers
 
             return View();
         }
+        */
 
 
     }

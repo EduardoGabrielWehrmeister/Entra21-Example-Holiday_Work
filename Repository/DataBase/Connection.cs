@@ -14,6 +14,7 @@ namespace Repository.DataBase
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            connection.Open();
 
             SqlCommand command = new SqlCommand();
             command.Connection = connection;

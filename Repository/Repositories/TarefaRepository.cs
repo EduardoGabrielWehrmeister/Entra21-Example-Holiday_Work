@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
+    /*
     public class TarefaRepository : ITarefaRepository
     {
         public SistemaContext context;
@@ -79,4 +80,5 @@ namespace Repository.Repositories
         }
 
     }
+    */
 }
