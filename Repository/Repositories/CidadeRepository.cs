@@ -33,8 +33,10 @@ namespace Repository.Repositories
 
         public List<Cidade> ObterTodos(int idEstado)
         {
-            return context.Cidades.Include("Estado").Where(x => x.EstadoId == idEstado)
+            return context.Cidades.Include("Estado")
+                    .Where(x => x.EstadoId == idEstado)
                 .ToList();
+                
         }
 
         public int Inserir(Cidade cidade)
@@ -50,17 +52,6 @@ namespace Repository.Repositories
             return (from x in context.Cidades where x.Id == id select x).FirstOrDefault();
         }
 
-        public List<Cidade> ObterTodos(string busca)
-        {
-            return (from x in context.Cidades
-                    where x.RegistroAtivo == true &&
-(x.Nome.Contains(busca) ||
-x.Estado.Nome.Contains(busca))
-                    orderby x.Nome
-                    select x).ToList();
-                               
-        }
-
         public bool Update(Cidade cidade)
         {
             Cidade cidadeOriginal = (from x in context.Cidades where x.Id == x.Id select x).FirstOrDefault();
@@ -73,6 +64,16 @@ x.Estado.Nome.Contains(busca))
             cidadeOriginal.EstadoId = cidade.EstadoId;
             context.SaveChanges();
             return true;
+        }
+
+        public List<Cidade> ObterTodos(string busca)
+        {
+            return (from x in context.Cidades
+                    where x.RegistroAtivo == true &&
+(x.Nome.Contains(busca) ||
+x.Estado.Nome.Contains(busca))
+                    orderby x.Nome
+                    select x).ToList();
         }
     }
 }

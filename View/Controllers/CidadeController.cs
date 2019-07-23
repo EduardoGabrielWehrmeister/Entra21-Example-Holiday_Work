@@ -22,23 +22,12 @@ namespace View.Controllers
         }
 
 
-        public ActionResult Index(string busca)
+        public ActionResult Index()
         {
-            List<Cidade> cidades = repository.ObterTodos(busca);
+            List<Cidade> cidades = repository.ObterTodos("");
             ViewBag.Cidades = cidades;
             return View();
         }
-
-       /* [HttpGet]
-        public JsonResult ObterTodos(string busca)
-        {
-            List<Cidade> cidades = repository.ObterTodos(busca);
-            List<Estado> estados = estadoRepository.ObterTodos(busca);
-            return Json(new { Cidades = cidades, Estados = estados}, JsonRequestBehavior.AllowGet);
-
-            
-        }
-        */
 
         public ActionResult Cadastro()
         {
