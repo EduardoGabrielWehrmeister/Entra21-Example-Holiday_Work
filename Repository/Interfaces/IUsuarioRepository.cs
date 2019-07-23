@@ -9,15 +9,15 @@ namespace Repository.Interfaces
 {
     interface IUsuarioRepository
     {
-        List<Usuario> ObterTodos(string busca);
+        List<Usuario> ObterTodos();
 
         int Inserir(Usuario usuario);
 
-        bool Alterar(Usuario usuario);
+        bool Update(Usuario usuario);
 
         Usuario ObterPeloId(int id);
 
-        bool Apagar(int id);
+        bool Delete(int id);
 
     }
 }

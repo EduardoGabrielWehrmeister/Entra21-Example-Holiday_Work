@@ -16,48 +16,53 @@ namespace View.Controllers
         {
             repository = new UsuarioRepository();
         }
-
-        [HttpGet]
+        
         public ActionResult Index()
         {
+            List<Usuario> usuarios = repository.ObterTodos();
+            ViewBag.Usuarios = usuarios;
             return View();
         }
 
-        [HttpGet]
-        public JsonResult ObterTodos(string busca)
+        public ActionResult Cadastro()
         {
-            List<Usuario> usuarios = repository.ObterTodos(busca);
-            return Json(usuarios, JsonRequestBehavior.AllowGet);
+            List<Usuario> usuarios = repository.ObterTodos();
+            ViewBag.Usuarios = usuarios;
+            return View();
         }
 
-        [HttpPost]
-        public JsonResult Store(Usuario usuario)
+        public ActionResult Store(string nome, string login, string senha)
         {
-            usuario.RegistroAtivo = true;
+            Usuario usuario = new Usuario();
+            usuario.Nome = nome;
+            usuario.Login = login;
+            usuario.Senha = senha;
             repository.Inserir(usuario);
-            return Json(usuario);
+            return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        [Route("apagar/{id}")]
-        public JsonResult Apagar(int id)
+        public ActionResult Delete(int id)
         {
-            bool apagou = repository.Apagar(id);
-            return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
+            repository.Delete(id);
+            return RedirectToAction("Index");
         }
 
-        [HttpGet, Route("obterpeloid/{id}")]
-        public JsonResult ObterPeloId(int id)
+        public ActionResult Editar(int id)
         {
             Usuario usuario = repository.ObterPeloId(id);
-            return Json(usuario, JsonRequestBehavior.AllowGet);
+            ViewBag.Usuario = usuario;
+            return View();
         }
 
-        [HttpPost]
-        public JsonResult Update(Usuario usuario)
+        public ActionResult Update(int id, string nome, string login, string senha)
         {
-            bool alterou = repository.Alterar(usuario);
-            return Json(new { status = alterou });
+            Usuario usuario = new Usuario();
+            usuario.Id = id;
+            usuario.Nome = nome;
+            usuario.Login = login;
+            usuario.Senha = senha;
+            repository.Update(usuario);
+            return RedirectToAction("Index");
         }
     }
 }
