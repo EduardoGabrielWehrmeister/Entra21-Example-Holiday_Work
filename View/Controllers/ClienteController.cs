@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace View.Controllers
 {
+    /*
     public class ClienteController : Controller
     {
         private ClienteRepository repository;
@@ -81,4 +82,5 @@ namespace View.Controllers
             return RedirectToAction("Index");
         }
     }
+    */
 }

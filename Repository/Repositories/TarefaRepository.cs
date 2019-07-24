@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
+    /*
     public class TarefaRepository : ITarefaRepository
     {
         public bool Delete(int id)
@@ -149,4 +150,5 @@ duracao = @DURACAO WHERE id = @ID";
             return quantidade == 1;
         }
     }
+    */
 }

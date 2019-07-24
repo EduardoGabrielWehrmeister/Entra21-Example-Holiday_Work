@@ -10,6 +10,7 @@ namespace View.Controllers
 {
     public class TarefaController : Controller
     {
+        /*
         private TarefaRepository repository;
 
         public TarefaController()
@@ -24,7 +25,8 @@ namespace View.Controllers
             return View();
         }
 
-        public ActionResult Cadastro()
+        /*[HttpGet]
+        public ActionResult ObterTodos(string busca)
         {
             CategoriaRepository categoriaRepository = new CategoriaRepository();
             List<Categoria> categorias = categoriaRepository.ObterTodos("");
@@ -79,6 +81,7 @@ namespace View.Controllers
 
             return View();
         }
+        */
 
         public ActionResult Update(int id, int idCategoria, int idProjeto, int idUsuario, string titulo, string descricao, DateTime duracao)
         {
