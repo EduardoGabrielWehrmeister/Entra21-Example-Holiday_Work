@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h3 class="titulo">Editar Tarefas</h3>
+
+<form action="@Url.Action("Update")" method="post" id="needs-validation">
+    <input type="hidden" name="id" value="@ViewBag.Tarefa.Id"/>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-usuario">Usuário</label>
+                <select id="campo-usuario" name="idUsuario" class="form-control">
+                    <option disabled="disabled" selected="selected">Selecione um Usuário</option>
+                    @foreach(Model.Usuario usuario in ViewBag.Usuarios)
+                    {
+                        if(usuario.Id == ViewBag.IdUsuario)
+                        {
+                            <option value="@usuario.Id" selected="selected">@usuario.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@usuario.Id">@usuario.Nome</option>
+                        }
+                    }
+                </select>
+
+                <label for="campo-projeto">Projeto</label>
+                <select id="campo-projeto" name="idProjeto" class="form-control">
+                    <option disabled="disabled" selected="selected">Selecione um Projeto</option>
+                    @foreach(Model.Projeto projeto in ViewBag.Projetos)
+                    {
+                        if(projeto.Id == ViewBag.IdProjeto)
+                        {
+                            <option value="@projeto.Id" selected="selected">@projeto.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@projeto.Id">@projeto.Nome</option>
+                        }
+                    }
+                </select>
+
+                <label for="campo-categoria">Categoria</label>
+                <select id="campo-categoria" name="idCategoria" class="form-control">
+                    <option disabled="disabled" selected="selected">Selecione uma Categoria</option>
+                    @foreach(Model.Categoria categoria in ViewBag.Categorias)
+                    {
+                        if(categoria.Id == ViewBag.IdCategoria)
+                        {
+                            <option value="@categoria.Id" selected="selected">@categoria.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@categoria.Id">@categoria.Nome</option>
+                        }
+                    }
+                </select>
+
+                <label for="campo-titulo">Título</label>
+                <input type="text" id="campo-titulo" name="titulo" class="form-control" value="@ViewBag.Categoria.Titulo"/>
+
+                <label for="campo-descricao">Descrição</label>
+                <textarea id="campo-descricao" name="complemento" class="form-control" value="@ViewBag.Categoria.Descricao"/>
+
+                <label for="campo-duracao">Duração</label>
+                <input type="date" id="campo-duracao" name="duracao" class="form-control" valeu="@ViewBag.Categoria.Duracao"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-success float-right mt-3" type="submit"><i class="fa fas-save"></i>Salvar</button>
+        </div>
+    </div>
+</form>
+

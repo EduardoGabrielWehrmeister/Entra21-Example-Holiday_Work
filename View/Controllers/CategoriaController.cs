@@ -42,7 +42,7 @@ namespace View.Controllers
         [Route("apagar/{id}")]
         public JsonResult Apagar(int id)
         {
-            bool apagou = repository.Delete(id);
+            bool apagou = repository.Apagar(id);
             return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
         }
 
@@ -56,7 +56,7 @@ namespace View.Controllers
         [HttpPost]
         public JsonResult Update(Categoria categoria)
         {
-            bool alterou = repository.Update(categoria);
+            bool alterou = repository.Alterar(categoria);
             return Json(new { status = alterou });
         }
 

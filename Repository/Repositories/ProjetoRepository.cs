@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    /*
+    
     public class ProjetoRepository : IProjetoRepository
     {
 
@@ -75,5 +75,5 @@ x.Cliente.Nome.Contains(busca))
             return true;
         }
     }
-    */
+    
 }

@@ -62,13 +62,13 @@ CREATE TABLE categorias(
 DROP TABLE tarefas;
 CREATE TABLE tarefas(
 	id INT PRIMARY KEY IDENTITY(1,1),
-	id_usuario_responsavel INT,
+	id_usuario INT,
 	id_projeto INT,
 	id_categoria INT,
 	titulo VARCHAR(50),
 	descricao TEXT,
 	duracao DATETIME2(7),
-	CONSTRAINT fk_usuario_responsavel FOREIGN KEY (id_usuario_responsavel) REFERENCES usuarios(id),
+	CONSTRAINT fk_usuario_responsavel FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
 	CONSTRAINT fk_projeto FOREIGN KEY (id_projeto) REFERENCES projetos(id),
 	CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categorias(id),
 	data_criacao DATETIME2,

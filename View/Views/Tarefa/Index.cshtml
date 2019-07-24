@@ -5,12 +5,7 @@
 
 <h3>Lista de Tarefas</h3>
 
-<div class="row">
-    <div class="col-12">
         <a href="@Url.Action("Cadastro")" class="btn btn-primary float-right mb-3"><i class="fa fa-plus"></i> Novo Usuário</a>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-3 offset-9">
         <div class="form-group">
@@ -31,6 +26,7 @@
             <th>Categoria</th>
             <th>Projeto</th>
             <th>Usuário</th>
+            <th>Ação</th>
         </tr>
     </thead>
 
@@ -48,7 +44,7 @@
                 <td>
                     <a href="@Url.Action("Editar", new { id = tarefa.Id})" class="btn btn-info"><i class="fas fa-pen"></i> Editar</a>
 
-                    <a href="@Url.Action("Delete", new { id = tarefa.Id})" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>
+                    <a href="@Url.Action("Apagar", new { id = tarefa.Id})" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>
                 </td>
             </tr>
         }
@@ -63,10 +59,9 @@
             <th>Categoria</th>
             <th>Projeto</th>
             <th>Usuário</th>
+            <th>Ação</th>
         </tr>
     </tfoot>
 </table>
-
-
 
 
