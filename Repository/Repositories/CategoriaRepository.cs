@@ -13,76 +13,66 @@ namespace Repository.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        public bool Delete(int id)
+        public SistemaContext context;
+
+        public CategoriaRepository()
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = "DELETE FROM categorias WHERE id = @ID";
-            command.Parameters.AddWithValue("@ID", id);
-            int quantidadeAfetada = command.ExecuteNonQuery();
-            command.Connection.Close();
-            return quantidadeAfetada == 1;
+            context = new SistemaContext();
+        }
+
+        public bool Apagar(int id)
+        {
+            Categoria categoria = (from x in context.Categorias
+                                   where x.Id == id
+                                   select x).FirstOrDefault();
+
+            if (categoria == null)
+            {
+                return false;
+            }
+
+            categoria.RegistroAtivo = false;
+            context.SaveChanges();
+            return true;
         }
 
         public int Inserir(Categoria categoria)
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = "INSERT INTO categorias (nome) OUTPUT INSERTED.ID VALUES (@NOME)";
-            command.Parameters.AddWithValue("@NOME", categoria.Nome);
-            int id = Convert.ToInt32(command.ExecuteScalar());
-            command.Connection.Close();
-            return id;
+            categoria.DataCriacao = DateTime.Now;
+            context.Categorias.Add(categoria);
+            context.SaveChanges();
+            return categoria.Id;
         }
 
         public Categoria ObterPeloId(int id)
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = @"SELECT * FROM categorias WHERE id = @ID";
-            command.Parameters.AddWithValue("@ID", id);
-            DataTable table = new DataTable();
-            table.Load(command.ExecuteReader());
-            command.Connection.Close();
-            if(table.Rows.Count == 0)
-            {
-                return null;
-            }
-            DataRow row = table.Rows[0];
-            Categoria categoria = new Categoria();
-            categoria.Id = Convert.ToInt32(row["id"]);
-            categoria.Nome = row["nome"].ToString();
-            return categoria;
+            return (from x in context.Categorias where x.Id == id select x).FirstOrDefault();
         }
 
-        public List<Categoria> ObterTodos()
+        public List<Categoria> ObterTodos(string busca)
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = "SELECT * FROM categorias";
-
-            DataTable table = new DataTable();
-            table.Load(command.ExecuteReader());
-            List<Categoria> categorias = new List<Categoria>();
-            command.Connection.Close();
-
-            foreach(DataRow row in table.Rows)
-            {
-                Categoria categoria = new Categoria()
-                {
-                    Id = Convert.ToInt32(row["id"]),
-                    Nome = row["nome"].ToString()
-                };
-                categorias.Add(categoria);
-            }
-            return categorias;
+            return (from x in context.Categorias
+                    where
+                    x.RegistroAtivo == true &&
+                    (x.Nome.Contains(busca))
+                    orderby x.Nome
+                    select x).ToList();
         }
 
-        public bool Update(Categoria categoria)
+        public bool Alterar(Categoria categoria)
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = "UPDATE categorias SET nome = @NOME WHERE id = @ID";
-            command.Parameters.AddWithValue("@NOME", categoria.Nome);
-            command.Parameters.AddWithValue("@ID", categoria.Id);
-            int quantidadeAfetada = command.ExecuteNonQuery();
-            command.Connection.Close();
-            return quantidadeAfetada == 1;
+            Categoria categoriaOriginal = (from x in context.Categorias
+                                           where x.Id == categoria.Id
+                                           select x).FirstOrDefault();
+
+            if (categoriaOriginal == null)
+            {
+                return false;
+            }
+            categoriaOriginal.Nome = categoria.Nome;
+            context.SaveChanges();
+            return true;
         }
+
     }
 }

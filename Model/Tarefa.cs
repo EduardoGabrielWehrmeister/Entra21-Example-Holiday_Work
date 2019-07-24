@@ -7,33 +7,21 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    [Table("tarefas")]
-    public class Tarefa : Base
+    
+    public class Tarefa
     {
-        [Column("titulo")]
-        public string Titulo { get; set; }
+        public int Id;
+        public string Titulo;
+        public string Descricao;
+        public DateTime Duracao;
 
-        [Column("descricao")]
-        public string Descricao { get; set; }
+        public int IdUsuario;
+        public Usuario Usuario;
 
-        [Column("duracao")]
-        public DateTime Duracao { get; set; }
+        public int IdProjeto;
+        public Projeto Projeto;
 
-        [ForeignKey("CategoriaId")]
-        public virtual Categoria Categoria { get; set; }
-        [Column("categoria_id")]
-        public int CategoriaId { get; set; }
-
-        /*[ForeignKey("ProjetoId")]
-        public virtual Projeto Projeto { get; set; }
-        [Column("projeto_id")]
-        public int ProjetoId { get; set; }
-        */
-
-        [ForeignKey("UsuarioResponsavelId")]
-        public virtual Usuario Usuario { get; set; } 
-        [Column("usuario_responsavel_id")]
-        public int UsuarioResponsavelId { get; set; }
-        
+        public int IdCategoria;
+        public Categoria Categoria;
     }
 }

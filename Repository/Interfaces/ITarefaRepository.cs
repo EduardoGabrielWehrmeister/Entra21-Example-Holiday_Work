@@ -11,12 +11,12 @@ namespace Repository.Interfaces
     {
         int Inserir(Tarefa tarefa);
 
-        bool Apagar(int id);
+        bool Delete(int id);
 
-        bool Alterar(Tarefa tarefa);
+        bool Update(Tarefa tarefa);
 
         Tarefa ObterPeloId(int id);
 
-        List<Tarefa> ObterTodos(string busca);
+        List<Tarefa> ObterTodos();
     }
 }

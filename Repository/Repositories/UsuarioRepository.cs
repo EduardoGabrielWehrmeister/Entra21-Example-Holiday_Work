@@ -13,91 +13,75 @@ namespace Repository.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        public bool Delete(int id)
+        public SistemaContext context;
+
+        public UsuarioRepository()
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = "DELETE FROM usuarios WHERE id = @ID";
-            command.Parameters.AddWithValue("@ID", id);
-            int quantidadeAfetada = command.ExecuteNonQuery();
-            command.Connection.Close();
-            return quantidadeAfetada == 1;
+            context = new SistemaContext();
+        }
+
+        public bool Alterar(Usuario usuario)
+        {
+            Usuario usuarioOriginal = (
+                from x in context.Usuarios
+                where x.Id == usuario.Id
+                select x).FirstOrDefault();
+
+            if (usuarioOriginal == null)
+            {
+                return false;
+            }
+
+            usuarioOriginal.Nome = usuario.Nome;
+            usuarioOriginal.Login = usuario.Login;
+            usuarioOriginal.Senha = usuario.Senha;
+            context.SaveChanges();
+            return true;
+        }
+
+        public bool Apagar(int id)
+        {
+            Usuario usuario = (
+                from usuarios in context.Usuarios
+                where usuarios.Id == id
+                select usuarios
+                ).FirstOrDefault();
+
+            if (usuario == null)
+            {
+                return false;
+            }
+
+            usuario.RegistroAtivo = false;
+            context.SaveChanges();
+            return true;
         }
 
         public int Inserir(Usuario usuario)
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = @"INSERT INTO usuarios (nome, login, senha)
-OUTPUT INSERTED.ID VALUES (@NOME, @LOGIN, @SENHA)";
-            command.Parameters.AddWithValue("@NOME", usuario.Nome);
-            command.Parameters.AddWithValue("@LOGIN", usuario.Login);
-            command.Parameters.AddWithValue("@SENHA", usuario.Senha);
-            int id = Convert.ToInt32(command.ExecuteScalar());
-            command.Connection.Close();
-            return id;
+            usuario.DataCriacao = DateTime.Now;
+            context.Usuarios.Add(usuario);
+            context.SaveChanges();
+            return usuario.Id;
         }
 
         public Usuario ObterPeloId(int id)
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = @"SELECT * FROM usuarios WHERE id = @ID";
-            command.Parameters.AddWithValue("@ID", id);
-            DataTable table = new DataTable();
-            table.Load(command.ExecuteReader());
-            command.Connection.Close();
-
-            if(table.Rows.Count == 0)
-            {
-                return null;
-            }
-
-            DataRow row = table.Rows[0];
-            Usuario usuario = new Usuario();
-            usuario.Id = Convert.ToInt32(row["id"]);
-            usuario.Nome = row["nome"].ToString();
-            usuario.Login = row["login"].ToString();
-            usuario.Senha = row["senha"].ToString();
-
-            return usuario;
+            return (from usuario in context.Usuarios
+                    where usuario.Id == id
+                    select usuario).FirstOrDefault();
         }
 
-        public List<Usuario> ObterTodos()
+        public List<Usuario> ObterTodos(string busca)
         {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = @"SELECT * FROM usuarios";
-
-            DataTable table = new DataTable();
-            table.Load(command.ExecuteReader());
-            List<Usuario> usuarios = new List<Usuario>();
-            command.Connection.Close();
-
-            foreach(DataRow row in table.Rows)
-            {
-                Usuario usuario = new Usuario()
-                {
-                    Id = Convert.ToInt32(row["id"]),
-                    Nome = row["nome"].ToString(),
-                    Login = row["login"].ToString(),
-                    Senha = row["senha"].ToString()
-                };
-                usuarios.Add(usuario);
-            }
-            return usuarios;
-        }
-
-        public bool Update(Usuario usuario)
-        {
-            SqlCommand command = Connection.OpenConnection();
-            command.CommandText = @"UPDATE usuarios SET 
-nome = @NOME, 
-login = @LOGIN,
-senha = @SENHA
-WHERE id = @ID";
-            command.Parameters.AddWithValue("@NOME", usuario.Nome);
-            command.Parameters.AddWithValue("@LOGIN", usuario.Login);
-            command.Parameters.AddWithValue("@SENHA", usuario.Senha);
-            int quantidadeAfetada = command.ExecuteNonQuery();
-            command.Connection.Close();
-            return quantidadeAfetada == 1;
+            return (from usuario in context.Usuarios
+                    where
+                        usuario.RegistroAtivo == true &&
+                        (usuario.Nome.Contains(busca) ||
+                        usuario.Login.Contains(busca))
+                    orderby usuario.Nome
+                    select usuario
+                    ).ToList();
         }
     }
 }

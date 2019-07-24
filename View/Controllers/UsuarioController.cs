@@ -16,53 +16,48 @@ namespace View.Controllers
         {
             repository = new UsuarioRepository();
         }
-        
+
+        [HttpGet]
         public ActionResult Index()
         {
-            List<Usuario> usuarios = repository.ObterTodos();
-            ViewBag.Usuarios = usuarios;
             return View();
         }
 
-        public ActionResult Cadastro()
+        [HttpGet]
+        public JsonResult ObterTodos(string busca)
         {
-            List<Usuario> usuarios = repository.ObterTodos();
-            ViewBag.Usuarios = usuarios;
-            return View();
+            List<Usuario> usuarios = repository.ObterTodos(busca);
+            return Json(usuarios, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Store(string nome, string login, string senha)
+        [HttpPost]
+        public JsonResult Store(Usuario usuario)
         {
-            Usuario usuario = new Usuario();
-            usuario.Nome = nome;
-            usuario.Login = login;
-            usuario.Senha = senha;
+            usuario.RegistroAtivo = true;
             repository.Inserir(usuario);
-            return RedirectToAction("Index");
+            return Json(usuario);
         }
 
-        public ActionResult Delete(int id)
+        [HttpGet]
+        [Route("apagar/{id}")]
+        public JsonResult Apagar(int id)
         {
-            repository.Delete(id);
-            return RedirectToAction("Index");
+            bool apagou = repository.Apagar(id);
+            return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Editar(int id)
+        [HttpGet, Route("obterpeloid/{id}")]
+        public JsonResult ObterPeloId(int id)
         {
             Usuario usuario = repository.ObterPeloId(id);
-            ViewBag.Usuario = usuario;
-            return View();
+            return Json(usuario, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Update(int id, string nome, string login, string senha)
+        [HttpPost]
+        public JsonResult Update(Usuario usuario)
         {
-            Usuario usuario = new Usuario();
-            usuario.Id = id;
-            usuario.Nome = nome;
-            usuario.Login = login;
-            usuario.Senha = senha;
-            repository.Update(usuario);
-            return RedirectToAction("Index");
+            bool alterou = repository.Alterar(usuario);
+            return Json(new { status = alterou });
         }
     }
 }

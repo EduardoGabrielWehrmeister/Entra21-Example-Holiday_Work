@@ -17,41 +17,48 @@ namespace View.Controllers
             repository = new CategoriaRepository();
         }
 
+        [HttpGet]
         public ActionResult Index()
-        {
-            List<Categoria> categorias = repository.ObterTodos();
-            ViewBag.Categorias = categorias;
+        {           
             return View();
         }
 
-        public ActionResult Cadastro()
+        [HttpGet]
+        public JsonResult ObterTodos(string busca)
         {
-            return View();
+            List<Categoria> categorias = repository.ObterTodos(busca);
+            return Json(categorias, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Store(string nome)
+        [HttpPost]
+        public JsonResult Store(Categoria categoria)
         {
-            Categoria categoria = new Categoria();
-            categoria.Nome = nome;
+            categoria.RegistroAtivo = true;
             repository.Inserir(categoria);
-            return RedirectToAction("Index");
+            return Json(categoria);
         }
 
-        public ActionResult Editar(int id)
+        [HttpGet]
+        [Route("apagar/{id}")]
+        public JsonResult Apagar(int id)
+        {
+            bool apagou = repository.Delete(id);
+            return Json(new { status = apagou }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet, Route("obterpeloid/{id}")]
+        public JsonResult ObterPeloId(int id)
         {
             Categoria categoria = repository.ObterPeloId(id);
-            ViewBag.Categoria = categoria;
-            return View();
+            return Json(categoria, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Update(int id, string nome)
+        [HttpPost]
+        public JsonResult Update(Categoria categoria)
         {
-            Categoria categoria = new Categoria();
-            categoria.Id = id;
-            categoria.Nome = nome;
-            repository.Update(categoria);
-            return RedirectToAction("Index");
+            bool alterou = repository.Update(categoria);
+            return Json(new { status = alterou });
         }
-        
+
     }
 }
