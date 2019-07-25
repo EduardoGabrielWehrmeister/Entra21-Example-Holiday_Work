@@ -32,7 +32,6 @@
                 busca: $busca
             },
             success: function (data) {
-
                 for (var i = 0; i < data.length; i++) {
                     var dado = data[i];
 
@@ -41,31 +40,36 @@
                     colunaCodigo.innerHTML = dado.Id;
 
                     var colunaNome = document.createElement("td");
-                    colunaNome.innerHTML = dado.Id;
+                    colunaNome.innerHTML = dado.Nome;
 
                     var colunaLogin = document.createElement("td");
-                    colunaLogin.innerHTML = dado.Id;
+                    colunaLogin.innerHTML = dado.Login;
 
                     var colunaSenha = document.createElement("td");
-                    colunaSenha.innerHTML = dado.Id;
+                    colunaSenha.innerHTML = dado.Senha;
 
                     var colunaAcao = document.createElement("td");
                     var botaoEditar = document.createElement("button");
                     botaoEditar.classList.add("btn", "btn-primary", "mr-3", "botao-editar");
-                    botaoEditar.innerHTML = "<i class\"fas fa-pen\"></i> Editar";
+                    botaoEditar.innerHTML = "<i class=\"fas fa-pen\"></i> Editar";
                     botaoEditar.setAttribute("data-id", dado.Id);
 
                     var botaoApagar = document.createElement("button");
-                    botaoApagar.innerHTML = "<i class\"fas fa-trash\"></i> Apagar";
+                    botaoApagar.innerHTML = "<i class=\"fas fa-trash\"></i> Apagar";
                     botaoApagar.classList.add("btn", "btn-danger", "botao-apagar");
-                    botaoApagar.setAttribute("data-id", data.Id);
+                    botaoApagar.setAttribute("data-id", dado.Id);
+
+                    colunaAcao.appendChild(botaoEditar);
+                    colunaAcao.appendChild(botaoApagar);
 
                     linha.appendChild(colunaCodigo);
                     linha.appendChild(colunaNome);
                     linha.appendChild(colunaLogin);
                     linha.appendChild(colunaSenha);
                     linha.appendChild(colunaAcao);
-                    document.getElementById("lista-usuarios").appendChild(linha);
+                    if (document.getElementById("lista-usuarios") != null) {
+                        document.getElementById("lista-usuarios").appendChild(linha);
+                    }
                 }
             },
             error: function (data) {
@@ -117,7 +121,7 @@
             data: {
                 Nome: $nome,
                 Login: $login,
-                Senha: $senha
+                Senha: $senha,
             },
             success: function (data) {
                 $id = -1;

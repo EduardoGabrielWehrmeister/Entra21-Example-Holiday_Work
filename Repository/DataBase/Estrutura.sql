@@ -74,3 +74,5 @@ CREATE TABLE tarefas(
 	data_criacao DATETIME2,
 	registro_ativo BIT
 );
+
+SELECT * FROM usuarios
