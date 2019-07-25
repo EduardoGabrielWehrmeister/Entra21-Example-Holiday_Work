@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 namespace Model
 {
 
-    public class Cidade 
+    public class Cidade : Base
     {
-        public int Id;
-
         public string Nome;
 
         public int NumeroHabitantes;
