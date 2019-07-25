@@ -67,20 +67,20 @@ namespace Repository.Repositories
 
         public Usuario ObterPeloId(int id)
         {
-            return (from usuario in context.Usuarios
-                    where usuario.Id == id
-                    select usuario).FirstOrDefault();
+            return (from x in context.Usuarios
+                    where x.Id == id
+                    select x).FirstOrDefault();
         }
 
         public List<Usuario> ObterTodos(string busca)
         {
-            return (from usuario in context.Usuarios
+            return (from x in context.Usuarios
                     where
-                        usuario.RegistroAtivo == true &&
-                        (usuario.Nome.Contains(busca) ||
-                        usuario.Login.Contains(busca))
-                    orderby usuario.Nome
-                    select usuario
+                        x.RegistroAtivo == true &&
+                        (x.Nome.Contains(busca) ||
+                        x.Login.Contains(busca))
+                    orderby x.Nome
+                    select x
                     ).ToList();
         }
     }
