@@ -18,7 +18,7 @@
 
 
                 <label for="campo-data-nascimento">Data Nascimento</label>
-                <input type="date" name="dataNascimento" id="campo-data-nascimento" class="form-control" value="@ViewBag.Cliente.DataNascimento"/>
+                <input type="date" name="dataNascimento" id="campo-data-nascimento" class="form-control" value="@ViewBag.Cliente.DataNascimento.ToString("dd/MM/yyyy")"/>
 
                 <label for="campo-cidade">Cidade</label>
                 <select id="campo-cidade" name="idCidade" class="form-control">

@@ -7,40 +7,34 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    [Table("clientes")]
+  
     public class Cliente: Base
     {
-        public Cliente()
-        {
-            Projetos = new HashSet<Projeto>();
-        }
-        [Column("nome")]
-        public string Nome { get; set; }
 
-        [Column("cpf")]
-        public string Cpf { get; set; }
+        public string Nome;
 
-        [Column("data_nascimento")]
-        public DateTime DataNascimento { get; set; }
 
-        [Column("numero")]
-        public int Numero { get; set; }
+        public string Cpf;
 
-        [Column("complemento")]
-        public string Complemento { get; set; }
 
-        [Column("logradouro")]
-        public string Logradouro { get; set; }
+        public DateTime DataNascimento;
 
-        [Column("cep")]
-        public string Cep { get; set; }
 
-        [ForeignKey("IdCidade")]
-        public virtual Cidade Cidade { get; set; }
-        [Column("id_cidade")]
-        public int IdCidade { get; set; }
+        public int Numero;
 
-        public virtual ICollection<Projeto> Projetos { get; set; }
+
+        public string Complemento;
+
+
+        public string Logradouro;
+
+
+        public string Cep;
+
+
+        public int IdCidade;
+        public Cidade Cidade;
+   
  
     }
 }
