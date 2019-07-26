@@ -44,20 +44,15 @@ namespace Repository.Repositories
 
         }
 
-        public List<Projeto> ObterTodos(int idCliente)
-        {
-            return context.Projetos.Include("Cliente").Where(x => x.IdCliente == idCliente).ToList();
-
-        }
         public List<Projeto> ObterTodos(string busca)
         {
-
-            return (from x in context.Projetos
+            return (from x in context.Projetos.Include("Clientes")
                     where x.RegistroAtivo == true &&
 (x.Nome.Contains(busca) ||
 x.Cliente.Nome.Contains(busca))
                     orderby x.Nome
                     select x).ToList();
+
         }
 
         public bool Update(Projeto projeto)
