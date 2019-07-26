@@ -3,7 +3,7 @@
     ViewBag.Title = "Editar";
 }
 
-<h3 class="titulo">Editar Tarefas</h3>
+<h2>Editar Tarefas</h2>
 
 <form action="@Url.Action("Update")" method="post" id="needs-validation">
     <input type="hidden" name="id" value="@ViewBag.Tarefa.Id"/>
@@ -66,7 +66,7 @@
                 <textarea id="campo-descricao" name="complemento" class="form-control" value="@ViewBag.Categoria.Descricao"/>
 
                 <label for="campo-duracao">Duração</label>
-                <input type="date" id="campo-duracao" name="duracao" class="form-control" valeu="@ViewBag.Categoria.Duracao"/>
+                <input type="time" id="campo-duracao" name="duracao" class="form-control" valeu="@ViewBag.Categoria.Duracao"/>
             </div>
         </div>
     </div>

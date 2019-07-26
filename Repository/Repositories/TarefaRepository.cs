@@ -70,7 +70,7 @@ id_usuario, id_projeto, id_categoria, titulo, descricao, duracao) OUTPUT INSERTE
             return tarefa;
         }
 
-        public List<Tarefa> ObterTodos()
+        public List<Tarefa> ObterTodos(string busca)
         {
             SqlCommand command = Connection.OpenConnection();
             command.CommandText = @"SELECT

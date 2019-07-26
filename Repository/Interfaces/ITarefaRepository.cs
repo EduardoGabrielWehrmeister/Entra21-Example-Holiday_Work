@@ -17,6 +17,6 @@ namespace Repository.Interfaces
 
         Tarefa ObterPeloId(int id);
 
-        List<Tarefa> ObterTodos();
+        List<Tarefa> ObterTodos(string busca);
     }
 }

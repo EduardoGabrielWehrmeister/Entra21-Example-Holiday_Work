@@ -10,38 +10,61 @@ namespace View.Controllers
 {
     public class TarefaController : Controller
     {
-        
         private TarefaRepository repository;
+
+        private UsuarioRepository usuarioRepository;
+
+        private ProjetoRepository projetoRepository;
+
+        private CategoriaRepository categoriaRepository;
 
         public TarefaController()
         {
             repository = new TarefaRepository();
+
+            usuarioRepository = new UsuarioRepository();
+
+            projetoRepository = new ProjetoRepository();
+
+            categoriaRepository = new CategoriaRepository();
         }
 
         public ActionResult Index()
         {
-            List<Tarefa> tarefas = repository.ObterTodos();
+            List<Tarefa> tarefas = repository.ObterTodos("");
             ViewBag.Tarefas = tarefas;
             return View();
         }
 
-        [HttpGet]
-        public ActionResult ObterTodos(string busca)
+        public ActionResult Cadastro()
+        {
+            List<Usuario> usuarios = usuarioRepository.ObterTodos("");
+            ViewBag.Usuarios = usuarios;
+
+            List<Projeto> projetos = projetoRepository.ObterTodos("");
+            ViewBag.Projetos = projetos;
+
+            List<Categoria> categorias = categoriaRepository.ObterTodos("");
+            ViewBag.Categorias = categorias;
+            return View();
+        }
+       
+        /*public ActionResult ObterTodos(string busca)
         {
             CategoriaRepository categoriaRepository = new CategoriaRepository();
             List<Categoria> categorias = categoriaRepository.ObterTodos("");
             ViewBag.Categorias = categorias;
 
-            ProjetoRepository projetoRepository = new ProjetoRepository();
-            List<Projeto> projetos = projetoRepository.ObterTodos("");
-            ViewBag.Projetos = projetos;
+            //ProjetoRepository projetoRepository = new ProjetoRepository();
+            //List<Projeto> projetos = projetoRepository.ObterTodos("");
+            //ViewBag.Projetos = projetos;
 
             UsuarioRepository usuarioRepository = new UsuarioRepository();
             List<Usuario> usuarios = usuarioRepository.ObterTodos("");
             ViewBag.Usuarios = usuarios;
 
             return View();
-        }
+        }*/
 
         public ActionResult Store(int idCategoria, int idUsuario, int idProjeto, string titulo, string descricao, DateTime duracao)
         {
