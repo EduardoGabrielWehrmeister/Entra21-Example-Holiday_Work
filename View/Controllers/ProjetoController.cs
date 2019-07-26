@@ -18,9 +18,9 @@ namespace View.Controllers
         }
 
         // GET: Projeto
-        public ActionResult Index(string busca)
+        public ActionResult Index()
         {
-            List<Projeto> projetos = repository.ObterTodos(busca);
+            List<Projeto> projetos = repository.ObterTodos("");
             ViewBag.Projetos = projetos;
             return View();
         }

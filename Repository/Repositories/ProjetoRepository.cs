@@ -46,13 +46,9 @@ namespace Repository.Repositories
 
         public List<Projeto> ObterTodos(string busca)
         {
-            return (from x in context.Projetos.Include("Clientes")
-                    where x.RegistroAtivo == true &&
-(x.Nome.Contains(busca) ||
-x.Cliente.Nome.Contains(busca))
-                    orderby x.Nome
-                    select x).ToList();
+            List<Projeto> projetos = context.Projetos.Include("Cliente").Where(x => x.RegistroAtivo == true).OrderBy(x => x.Nome).ToList();
 
+            return projetos;
         }
 
         public bool Update(Projeto projeto)
