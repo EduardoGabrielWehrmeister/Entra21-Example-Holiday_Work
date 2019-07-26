@@ -24,7 +24,7 @@ namespace Repository.Repositories
         {
             Usuario usuarioOriginal = (
                 from x in context.Usuarios
-                where x.Id == usuario.Id
+                where x.Id == x.Id
                 select x).FirstOrDefault();
 
             if (usuarioOriginal == null)
@@ -42,9 +42,9 @@ namespace Repository.Repositories
         public bool Apagar(int id)
         {
             Usuario usuario = (
-                from usuarios in context.Usuarios
-                where usuarios.Id == id
-                select usuarios
+                from x in context.Usuarios
+                where x.Id == id
+                select x
                 ).FirstOrDefault();
 
             if (usuario == null)
@@ -74,13 +74,13 @@ namespace Repository.Repositories
 
         public List<Usuario> ObterTodos(string busca)
         {
-            return (from x in context.Usuarios
+            return (from usuario in context.Usuarios
                     where
-                        x.RegistroAtivo == true &&
-                        (x.Nome.Contains(busca) ||
-                        x.Login.Contains(busca))
-                    orderby x.Nome
-                    select x
+                        usuario.RegistroAtivo == true &&
+                        (usuario.Nome.Contains(busca) ||
+                        usuario.Login.Contains(busca))
+                    orderby usuario.Nome
+                    select usuario
                     ).ToList();
         }
     }

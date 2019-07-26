@@ -301,9 +301,9 @@
     <Content Include="Views\Projeto\Index.cshtml" />
     <Content Include="Views\Projeto\Cadastro.cshtml" />
     <Content Include="Views\Cidade\Editar.cshtml" />
-    <Content Include="Views\Tarefa\Cadastro.cshtml" />
     <Content Include="Views\Tarefa\Editar.cshtml" />
     <Content Include="Views\Tarefa\Index.cshtml" />
+    <Content Include="Views\Tarefa\Cadastro.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
