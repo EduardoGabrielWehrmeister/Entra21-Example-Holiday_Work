@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace View.Controllers
 {
-        /*
+        
     public class ProjetoController : Controller
     {
         private ProjetoRepository repository;
@@ -73,6 +73,5 @@ namespace View.Controllers
             repository.Update(projeto);
             return RedirectToAction("Index");
         }
-    }
-    */
+    }  
 }
