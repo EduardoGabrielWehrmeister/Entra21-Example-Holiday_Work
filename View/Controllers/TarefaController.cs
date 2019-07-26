@@ -49,22 +49,22 @@ namespace View.Controllers
             return View();
         }
        
-        /*public ActionResult ObterTodos(string busca)
+        public ActionResult ObterTodos(string busca)
         {
             CategoriaRepository categoriaRepository = new CategoriaRepository();
             List<Categoria> categorias = categoriaRepository.ObterTodos("");
             ViewBag.Categorias = categorias;
 
-            //ProjetoRepository projetoRepository = new ProjetoRepository();
-            //List<Projeto> projetos = projetoRepository.ObterTodos("");
-            //ViewBag.Projetos = projetos;
+            ProjetoRepository projetoRepository = new ProjetoRepository();
+            List<Projeto> projetos = projetoRepository.ObterTodos("");
+            ViewBag.Projetos = projetos;
 
             UsuarioRepository usuarioRepository = new UsuarioRepository();
             List<Usuario> usuarios = usuarioRepository.ObterTodos("");
             ViewBag.Usuarios = usuarios;
 
             return View();
-        }*/
+        }
 
         public ActionResult Store(int idCategoria, int idUsuario, int idProjeto, string titulo, string descricao, DateTime duracao)
         {

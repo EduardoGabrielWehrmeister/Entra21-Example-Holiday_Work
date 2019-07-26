@@ -24,7 +24,7 @@ namespace Repository.Repositories
         {
             Usuario usuarioOriginal = (
                 from x in context.Usuarios
-                where x.Id == x.Id
+                where x.Id == usuario.Id
                 select x).FirstOrDefault();
 
             if (usuarioOriginal == null)
