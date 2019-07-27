@@ -12,7 +12,7 @@ namespace Repository.DataBase
     {
         public SistemaContext() : base("DefaultConnection")
         {
-            this.Configuration.ProxyCreationEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Estado> Estados { get; set; }     
