@@ -18,7 +18,7 @@ namespace Repository.Repositories
         public bool Delete(int id)
         {
             SqlCommand command = Connection.OpenConnection();
-            command.CommandText = "DELETE FROM cidades WHERE id = @ID";
+            command.CommandText = @"DELETE FROM projetos FROM projetos INNER JOIN clientes ON(projetos.id_cliente = clientes.id) WHERE projetos.id = @ID";
             command.Parameters.AddWithValue("@ID", id);
             int quantidadeAfetada = command.ExecuteNonQuery();
             command.Connection.Close();
