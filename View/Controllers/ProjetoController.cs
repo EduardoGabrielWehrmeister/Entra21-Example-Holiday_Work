@@ -38,7 +38,7 @@ namespace View.Controllers
             Projeto projeto = new Projeto();
             projeto.Nome = nome;
             projeto.DataCriacaoProjeto = dataCriacaoProjeto;
-            projeto.DataFinalizaca = dataFinalizacao;
+            projeto.DataFinalizacao = dataFinalizacao;
             projeto.IdCliente = idCliente;
             repository.Inserir(projeto);
             return RedirectToAction("Index");
@@ -68,7 +68,7 @@ namespace View.Controllers
             projeto.Id = id;
             projeto.Nome = nome;
             projeto.DataCriacaoProjeto = dataCriacaoProjeto;
-            projeto.DataFinalizaca = dataFinalizacao;
+            projeto.DataFinalizacao = dataFinalizacao;
             projeto.IdCliente = idCliente;
             repository.Update(projeto);
             return RedirectToAction("Index");
