@@ -19,6 +19,7 @@
             <th>Nome do Cliente</th>
             <th>Data de Criacao</th>
             <th>Data de Finalizacao</th>
+            <th>Ação</th>
         </tr>
     </thead>
 
@@ -30,7 +31,7 @@
                 <td>@projeto.Nome</td>
                 <td>@projeto.Cliente.Nome</td>
                 <td>@projeto.DataCriacaoProjeto</td>
-                <td>@projeto.DataFinalizaca</td>
+                <td>@projeto.DataFinalizacao</td>
                 <td>
                     <a href="@Url.Action("Editar", new { id = projeto.Id})" class="btn btn-info"><i class="fas fa-pen"></i> Editar</a>
 
@@ -47,6 +48,7 @@
             <th>Nome do Cliente</th>
             <th>Data de Criacao</th>
             <th>Data de Finalizacao</th>
+            <th>Ação</th>
         </tr>
     </tfoot>
 </table>

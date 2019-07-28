@@ -7,23 +7,22 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    [Table("projetos")]
-    public class Projeto: Base
+    
+    public class Projeto
     {
-        [Column("nome")]
-        public string Nome { get; set; }
+        public int Id;
 
-        [Column("data_criacao_projeto")]
-        public DateTime DataCriacaoProjeto { get; set; }
+        public string Nome;
 
-        [Column("data_finalizacao")]
-        public DateTime DataFinalizaca { get; set; }
+        public DateTime DataCriacaoProjeto;
 
-        [ForeignKey("IdCliente")]
-        public virtual Cliente Cliente { get; set; }
+        public DateTime DataFinalizacao;
 
-        [Column("id_cliente")]
-        public int IdCliente { get; set; }
+        public int IdCliente;
+
+        public Cliente Cliente;
+
+
 
     }
 }
