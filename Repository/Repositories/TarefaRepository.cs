@@ -123,6 +123,8 @@ INNER JOIN usuarios ON(tarefas.id_usuario =  usuarios.id)";
                 tarefa.Usuario = new Usuario();
                 tarefa.Usuario.Id = Convert.ToInt32(row["UsuarioId"]);
                 tarefa.Usuario.Nome = row["UsuarioNome"].ToString();
+
+                tarefas.Add(tarefa);
             }
             return tarefas;
         }
