@@ -5,7 +5,7 @@
 
 <h2>Editar</h2>
 
-<form action="@Url.Action("Update")" method="post">
+<form action="@Url.Action("Update")" method="post" id="needs-validation" novalidate>
     <input type="hidden" name="id" value="@ViewBag.Cidade.Id" />
     <div class="row">
         <div class="col-12">
@@ -29,10 +29,12 @@
                     }
                 </select>
                 <label for="campo-nome">Nome da Cidade</label>
-                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.Cidade.Nome" />
+                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.Cidade.Nome" required />
+                <div class="invalid-feedback">Digite um Nome da Cidade Válido</div>
 
                 <label for="campo-numero-habitantes">Numero de Habitantes</label>
-                <input type="text" name="numeroHabitantes" id="campo-numero-habitantes" class="form-control" value="@ViewBag.Cidade.NumeroHabitantes"/>
+                <input type="text" name="numeroHabitantes" id="campo-numero-habitantes" class="campohabitantes form-control" value="@ViewBag.Cidade.NumeroHabitantes" required />
+                <div class="invalid-feedback">Digite um Número de Habitantes Válido</div>
             </div>
         </div>
     </div>

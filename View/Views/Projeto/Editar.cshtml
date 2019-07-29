@@ -4,13 +4,14 @@
 }
 
 <h3>Editar Projeto</h3>
-<form action="@Url.Action("Update")" method="post" id="needs-validation">
+<form action="@Url.Action("Update")" method="post" id="needs-validation" novalidate>
     <input type="hidden" name="id" value="@ViewBag.Projeto.Id" />
     <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-nome">Nome do projeto</label>
-                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.Projeto.Nome"/>
+                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.Projeto.Nome" required />
+                <div class="invalid-feedback">Digite um Nome do projeto Válido</div>
 
                 <label for="campo-cliente">Cliente</label>
                 <select id="campo-cliente" name="idCliente" class="form-control">
@@ -30,10 +31,13 @@
                 </select>
 
                 <label for="campo-data-criacao">Data Criacao</label>
-                <input type="date" name="dataCriacaoProjeto" id="campo-data-criacao" class="form-control" value="@ViewBag.Projeto.DataCriacaoProjeto.ToString("dd/MM/yyyy")"/>
+                <input type="date" name="dataCriacaoProjeto" id="campo-data-criacao" class="form-control" value="@ViewBag.Projeto.DataCriacaoProjeto.ToString("dd/MM/yyyy")" required />
+                <div class="invalid-feedback">Digite uma Data de Criação Válida</div>
 
                 <label for="campo-data-finalizacao">Data Finalizacao</label>
-                <input type="date" name="datafinalizacao" id="campo-data-finalizacao" class="form-control" value="@ViewBag.Projeto.DataFinalizacao"/>
+                <input type="date" name="datafinalizacao" id="campo-data-finalizacao" class="form-control" value="@ViewBag.Projeto.DataFinalizacao" required />
+                <div class="invalid-feedback">Digite uma Data de Finalização Válida</div>
+
             </div>
         </div>
     </div>

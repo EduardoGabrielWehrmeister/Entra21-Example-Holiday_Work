@@ -5,7 +5,7 @@
 
 <h2>Cadastro de Cidades</h2>
 
-<form action="@Url.Action("Store")" method="post">
+<form action="@Url.Action("Store")" method="post" id="needs-validation" novalidate>
     <div class="row">
         <div class="col-12">
             <div class="form-group">
@@ -18,10 +18,12 @@
                     }
                 </select>
                 <label for="campo-nome">Nome da Cidade</label>
-                <input type="text" name="nome" id="campo-nome" class="form-control" />
+                <input type="text" name="nome" id="campo-nome" class="form-control" required/>
+                <div class="invalid-feedback">Digite um Nome da Cidade Válido</div>
 
                 <label for="campo-numero-habitantes">Numero de Habitantes</label>
-                <input type="text" name="numeroHabitantes" id="campo-numero-habitantes" class="form-control" />
+                <input type="text" name="numeroHabitantes" id="campo-numero-habitantes" class=" campohabitantes form-control" required />
+                <div class="invalid-feedback">Digite um Número de Habitantes Válido</div>
             </div>
         </div>
     </div>
