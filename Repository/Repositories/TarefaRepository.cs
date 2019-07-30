@@ -137,7 +137,7 @@ id_categoria = @ID_CATEGORIA,
 id_usuario = @ID_USUARIO,
 id_projeto = @ID_PROJETO,
 titulo = @TITULO,
-descicao = @DESCRICAO,
+descricao = @DESCRICAO,
 duracao = @DURACAO WHERE id = @ID";
 
             command.Parameters.AddWithValue("@ID_CATEGORIA", tarefa.IdCategoria);

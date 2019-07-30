@@ -25,6 +25,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/additional-methods.min.js"></script>
     <script src="~/Scripts/messages_pt_BR.min.js"></script>
+    
 
     <script>
         $(document).ready(function () {
@@ -35,6 +36,12 @@
         });
         $(document).ready(function () {
             $(".sigla").mask('AA')
+        });
+        $(document).ready(function () {
+            $(".tempo").mask("00:00:00")
+        });
+        $(document).ready(function () {
+            $('.campohabitantes').mask('000.000.000.000.000.000.000.000.000.000', { reverse: true });
         });
     </script>
 

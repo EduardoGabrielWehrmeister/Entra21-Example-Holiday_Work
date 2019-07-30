@@ -29,11 +29,11 @@
                 <td>@tarefa.Titulo</td>
                 <td>@tarefa.Descricao</td>
                 <td>@tarefa.Duracao</td>
-                <th>@tarefa.Projeto.Nome</th>
-                <th>@tarefa.Usuario.Nome</th>
-                <th>@tarefa.Categoria.Nome</th>
+                <td>@tarefa.Projeto.Nome</td>
+                <td>@tarefa.Usuario.Nome</td>
+                <td>@tarefa.Categoria.Nome</td>
                 <td>
-                    <a href="@Url.Action("Editar", new { id = tarefa.Id})" class="btn btn-info"><i class="fas fa-pen"></i> Editar</a>
+                    <a href="@Url.Action("Editar", new { id = tarefa.Id})" class="btn btn-primary"><i class="fas fa-pen"></i> Editar</a>
 
                     <a href="@Url.Action("Apagar", new { id = tarefa.Id})" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>
                 </td>
