@@ -99,7 +99,7 @@ namespace View.Controllers
             tarefa.Titulo = titulo;
             tarefa.Descricao = descricao;
             tarefa.Duracao = duracao;
-
+            repository.Update(tarefa);
             return RedirectToAction("Index");
         }
     }
