@@ -1,6 +1,6 @@
 ﻿<!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand text" href="#">Gerenciamento</a>
+    <a class="navbar-brand text" href="@Url.Action("Index", "Home")">Gerenciamento</a>
 
     <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -10,16 +10,10 @@
 
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="basicExampleNav">
-
-        <!-- Links -->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link font-italic" href="@Url.Action("Index", "Categoria")">Categorias</a>
-            </li>
-
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle font-italic" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Tabelas</a>
+                <a class="nav-link dropdown-toggle font-italic text-white" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><i class="fas fa-table"></i>Tabelas</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="@Url.Action("Index", "Categoria")">Categorias</a>
                     <a class="dropdown-item" href="@Url.Action("Index", "Cidade")">Cidades</a>
@@ -31,17 +25,18 @@
                 </div>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle font-italic" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Gerencimento de Usuários</a>
+                <a class="nav-link dropdown-toggle font-italic text-white" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Gerencimento de Tarefas</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="@Url.Action("Index", "Categoria")">Categorias</a>
                     <a class="dropdown-item" href="@Url.Action("Index", "Usuario")">Usuários</a>
                     <a class="dropdown-item" href="@Url.Action("Index", "Tarefa")">Tarefas</a>
                 </div>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle font-italic" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Gerencimento de Clientes</a>
+                <a class="nav-link dropdown-toggle font-italic text-white" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><i class="fas fa-project-diagram"></i> Gerencimento de Projetos</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="@Url.Action("Index", "Cliente")">Clientes</a>
                     <a class="dropdown-item" href="@Url.Action("Index", "Cidade")">Cidades</a>
@@ -52,6 +47,4 @@
 
         </ul>
     </div>
-
-
 </nav>

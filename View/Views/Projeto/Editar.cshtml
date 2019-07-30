@@ -31,11 +31,11 @@
                 </select>
 
                 <label for="campo-data-criacao">Data Criação</label>
-                <input type="date" name="dataCriacaoProjeto" id="campo-data-criacao" class="form-control" value="@ViewBag.Projeto.DataCriacaoProjeto.ToString("dd/MM/yyyy")" required />
+                <input type="date" name="dataCriacaoProjeto" id="campo-data-criacao" class="form-control" value="@ViewBag.Projeto.DataCriacaoProjeto.ToString("yyyy-MM-dd")" required />
                 <div class="invalid-feedback">Digite uma Data de Criação Válida</div>
 
                 <label for="campo-data-finalizacao">Data Finalização</label>
-                <input type="date" name="datafinalizacao" id="campo-data-finalizacao" class="form-control" value="@ViewBag.Projeto.DataFinalizacao.ToString("dd/MM/yyyy")" required />
+                <input type="date" name="datafinalizacao" id="campo-data-finalizacao" class="form-control" value="@ViewBag.Projeto.DataFinalizacao.ToString("yyyy-MM-dd")" required />
                 <div class="invalid-feedback">Digite uma Data de Finalização Válida</div>
 
             </div>

@@ -16,7 +16,7 @@
                     <option disabled="disabled" selected="selected">Selecione um Usuário</option>
                     @foreach (Model.Usuario usuario in ViewBag.Usuarios)
                     {
-                        if (usuario.Id == ViewBag.IdUsuario)
+                        if (usuario.Id == ViewBag.Tarefa.IdUsuario)
                         {
                             <option value="@usuario.Id" selected="selected">@usuario.Nome</option>
                         }
@@ -32,7 +32,7 @@
                     <option disabled="disabled" selected="selected">Selecione um Projeto</option>
                     @foreach (Model.Projeto projeto in ViewBag.Projetos)
                     {
-                        if (projeto.Id == ViewBag.IdProjeto)
+                        if (projeto.Id == ViewBag.Tarefa.IdProjeto)
                         {
                             <option value="@projeto.Id" selected="selected">@projeto.Nome</option>
                         }
@@ -48,7 +48,7 @@
                     <option disabled="disabled" selected="selected">Selecione uma Categoria</option>
                     @foreach (Model.Categoria categoria in ViewBag.Categorias)
                     {
-                        if (categoria.Id == ViewBag.IdCategoria)
+                        if (categoria.Id == ViewBag.Tarefa.IdCategoria)
                         {
                             <option value="@categoria.Id" selected="selected">@categoria.Nome</option>
                         }
@@ -64,7 +64,7 @@
                 <div class="invalid-feedback">Digite um Titulo Válido</div>
 
                 <label for="campo-descricao">Descrição</label>
-                <textarea id="campo-descricao" name="descricao" class="form-control" required value="@ViewBag.Tarefa.Descricao"></textarea>
+                <textarea id="campo-descricao" name="descricao" class="form-control" required">@ViewBag.Tarefa.Descricao</textarea>
                 <div class="invalid-feedback">Digite uma Descrição Válida</div>
 
                 <label for="campo-duracao">Duração</label>
