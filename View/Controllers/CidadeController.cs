@@ -36,10 +36,10 @@ namespace View.Controllers
             return View();
         }
 
-        public ActionResult Store(int estadoId, string nome, int numeroHabitantes)
+        public ActionResult Store(int idEstado, string nome, int numeroHabitantes)
         {
             Cidade cidade = new Cidade();
-            cidade.EstadoId = estadoId;
+            cidade.EstadoId = idEstado;
             cidade.Nome = nome;
             cidade.NumeroHabitantes = numeroHabitantes;
             repository.Inserir(cidade);
@@ -62,11 +62,11 @@ namespace View.Controllers
             return View();
         }
 
-        public ActionResult Update(int id, int estadoId, string nome, int numeroHabitantes)
+        public ActionResult Update(int id, int idEstado, string nome, int numeroHabitantes)
         {
             Cidade cidade = new Cidade();
             cidade.Id = id;
-            cidade.EstadoId = estadoId;
+            cidade.EstadoId = idEstado;
             cidade.Nome = nome;
             cidade.NumeroHabitantes = numeroHabitantes;
             repository.Update(cidade);
