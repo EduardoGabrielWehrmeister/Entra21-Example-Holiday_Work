@@ -60,7 +60,7 @@ namespace Repository.Repositories
         public bool Update(Estado estado)
         {
             Estado estadoOriginal = (from x in context.Estados
-                                     where x.Id == x.Id
+                                     where x.Id == estado.Id
                                      select x).FirstOrDefault();
             if (estadoOriginal == null)
             {
